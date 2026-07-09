@@ -58,8 +58,8 @@
       <span class="eyebrow">The Artifact</span>
       <h2>Walk through it in sequence</h2>
       <p>Each screen was storyboarded and generated separately with Adobe Firefly. Use Next to move
-      through them in the order a learner would actually experience — this is the intended path,
-      not a gallery to browse randomly.</p>
+      through them in the order a learner would actually experience — including a gated checkpoint
+      partway through that must be answered correctly before continuing.</p>
     </div>
 
     <div class="slideshow" id="slideshow">
@@ -163,29 +163,6 @@
   </div>
 </section>
 
-<section class="section section-tight" id="quiz">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Interactive Knowledge Check</span>
-      <h2>Rebuilt from the storyboard's drag-and-drop quiz</h2>
-      <p>The original storyboard specified a Captivate-style drag-and-drop sequencing exercise. Rebuilt
-      here as a working browser interaction — click the events in chronological order.</p>
-    </div>
-
-    <div class="quiz-box">
-      <p class="quiz-prompt">Arrange these events in the order they happened, earliest first:</p>
-      <div class="quiz-pool" id="quizPool"></div>
-      <p class="quiz-prompt" style="font-size:13.5px; margin-bottom:8px; color:var(--ink-soft);">Your sequence:</p>
-      <div class="quiz-answer" id="quizAnswer"></div>
-      <div class="quiz-controls">
-        <button class="btn btn-solid" id="quizCheck" style="border:none; cursor:pointer;">Check answer</button>
-        <button class="btn btn-ghost" id="quizReset" style="cursor:pointer;">Reset</button>
-      </div>
-      <p class="quiz-feedback" id="quizFeedback"></p>
-    </div>
-  </div>
-</section>
-
 <section class="section section-dark">
   <div class="wrap">
     <div class="section-head">
@@ -197,9 +174,9 @@
       <ul>
         <li><strong>Does the hook actually land without narration audio?</strong> — the module assumes
         sound-on; I'd want to test a captioned/silent-autoplay version for social distribution.</li>
-        <li><strong>Is one knowledge check enough?</strong> — a single sequencing quiz confirms recall
-        of order but not comprehension of *why* the order matters causally (e.g. why the Sun had to
-        form before Earth). I'd add a short "why" prompt after the sequencing check.</li>
+        <li><strong>Is one gated knowledge check enough?</strong> — the sequencing checkpoint confirms
+        recall of order but not comprehension of *why* the order matters causally (e.g. why the Sun had
+        to form before Earth). I'd add a short "why" prompt after the sequencing check.</li>
         <li><strong>Does the emotional arc hold for skeptical learners?</strong> — the design assumes
         the learner is open to wonder; I'd want to A/B test the opening hook against a more
         skepticism-forward variant for audiences less inclined toward awe-based framing.</li>

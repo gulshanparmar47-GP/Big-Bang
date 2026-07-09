@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Case Study — How Old Is the Universe? | [Your Name]</title>
+<title>Case Study — How Old Is the Universe? | Gulshan Parmar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -12,7 +12,7 @@
 
 <nav class="nav">
   <div class="wrap">
-    <a class="nav-mark" href="index.html">[Your Name]</a>
+    <a class="nav-mark" href="index.html">Gulshan Parmar</a>
     <ul class="nav-links">
       <li><a href="index.html#work">Work</a></li>
       <li><a href="index.html#about">About</a></li>
@@ -56,98 +56,26 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">The Artifact</span>
-      <h2>Screen-by-screen video clips</h2>
-      <p>Each screen was storyboarded and generated separately with Adobe Firefly. Shown here in the
-      same sequence as the narrative, next to the storyboard direction for that screen.</p>
+      <h2>Walk through it in sequence</h2>
+      <p>Each screen was storyboarded and generated separately with Adobe Firefly. Use Next to move
+      through them in the order a learner would actually experience — this is the intended path,
+      not a gallery to browse randomly.</p>
     </div>
 
-    <div class="reel-grid">
-      <div class="reel-card">
-        <div class="reel-frame">
-          <iframe src="https://www.youtube.com/embed/nEL8c4-J3gg" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="reel-body">
-          <div class="reel-index">Screen 01 · Hook</div>
-          <h3>Age of Universe</h3>
-          <p>"How old are you? ...have you ever wondered how old the Earth is?"</p>
-        </div>
+    <div class="slideshow" id="slideshow">
+      <div class="slide-frame" id="slideFrame"></div>
+      <div class="slide-info">
+        <div class="slide-progress" id="slideProgress">Screen 1 of 8</div>
+        <h3 id="slideTitle">
+          <span id="slideTitleText"></span>
+          <span class="slide-emotion" id="slideEmotion"></span>
+        </h3>
+        <p id="slideNarration"></p>
       </div>
-
-      <div class="reel-card">
-        <div class="reel-frame">
-          <iframe src="https://www.youtube.com/embed/p2WPOKuex2c" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="reel-body">
-          <div class="reel-index">Screen 02 · Awe</div>
-          <h3>Big Bang</h3>
-          <p>"13.8 billion years ago... came space, time, stars, galaxies, planets and eventually us."</p>
-        </div>
-      </div>
-
-      <div class="reel-card">
-        <div class="reel-frame">
-          <iframe src="https://drive.google.com/file/d/1BXNM2Kugk3HZnG-iFwD0R6MdzmaawaO6/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="reel-body">
-          <div class="reel-index">Screen 03 · Reflection</div>
-          <h3>Evolution</h3>
-          <p>"Nothing in the Universe remains exactly the same... Growth → Adaptation → Transformation."</p>
-        </div>
-      </div>
-
-      <div class="reel-card">
-        <div class="reel-frame">
-          <iframe src="https://www.youtube.com/embed/Z3mFCii8bds" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="reel-body">
-          <div class="reel-index">Screen 04 · Wonder</div>
-          <h3>Galaxies</h3>
-          <p>"It would take 100,000 years to cross the Milky Way at the speed of light."</p>
-        </div>
-      </div>
-
-      <div class="reel-card">
-        <div class="reel-frame">
-          <iframe src="https://www.youtube.com/embed/sn2HkMfArdk" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="reel-body">
-          <div class="reel-index">Screen 05 · Gratitude</div>
-          <h3>Sun</h3>
-          <p>"Without it, our planet would be a frozen and lifeless world."</p>
-        </div>
-      </div>
-
-      <div class="reel-card">
-        <div class="reel-frame">
-          <iframe src="https://www.youtube.com/embed/2_XApar-a5Y" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="reel-body">
-          <div class="reel-index">Screen 06 · Satisfaction</div>
-          <h3>Earth</h3>
-          <p>"What began as a hot, hostile world would eventually become our home."</p>
-        </div>
-      </div>
-
-      <div class="reel-card">
-        <div class="reel-frame">
-          <iframe src="https://www.youtube.com/embed/kQQYCWyz_sQ" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="reel-body">
-          <div class="reel-index">Screen 07 · Fascination</div>
-          <h3>Moon</h3>
-          <p>"The Moon helped stabilize Earth's tilt, creating the conditions that allowed life to flourish."</p>
-        </div>
-      </div>
-
-      <div class="reel-card">
-        <div class="reel-frame">
-          <iframe src="https://www.youtube.com/embed/1xWLL-7SNW8" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="reel-body">
-          <div class="reel-index">Screen 08 · Hope</div>
-          <h3>First Life</h3>
-          <p>"The first single-celled organisms emerged, marking the beginning of life on Earth."</p>
-        </div>
+      <div class="slide-controls">
+        <button class="slide-btn ghost" id="slidePrev">← Previous</button>
+        <div class="slide-dots" id="slideDots"></div>
+        <button class="slide-btn" id="slideNext">Next →</button>
       </div>
     </div>
   </div>
@@ -285,7 +213,7 @@
 
 <footer class="footer">
   <div class="wrap footer">
-    <span>[Your Name] — Instructional Designer</span>
+    <span>Gulshan Parmar — Instructional Designer</span>
     <a href="index.html">← Back to all work</a>
   </div>
 </footer>

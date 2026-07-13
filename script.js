@@ -208,7 +208,8 @@ function renderSlide() {
   slideFrame.style.backgroundImage = "";
 
   if (s.type === "video") {
-    slideFrame.innerHTML = `<iframe src="${s.src}" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe><div class="slide-stat">${s.onscreen}</div>`;
+    const embedUrl = `${s.src}?fs=0&cc_load_policy=1&rel=0&modestbranding=1`;
+    slideFrame.innerHTML = `<iframe src="${embedUrl}" allow="autoplay; encrypted-media" loading="lazy"></iframe><div class="slide-stat">${s.onscreen}</div>`;
   } else if (s.type === "image") {
     slideFrame.innerHTML = `<img src="${s.src}" alt="${s.title}" loading="lazy"><div class="slide-stat">${s.onscreen}</div>`;
   } else if (s.type === "statement") {
@@ -249,6 +250,24 @@ if (slideFrame) {
     slideIndex = slideIndex === slides.length - 1 ? 0 : slideIndex + 1;
     renderSlide();
   };
+
+  // Custom fullscreen: expand the whole slideshow card (video + nav bar together),
+  // not just the video, so Next/Previous/dots stay reachable while immersive.
+  const slideshowEl = document.getElementById("slideshow");
+  const expandBtn = document.getElementById("slideExpand");
+  if (slideshowEl && expandBtn) {
+    expandBtn.onclick = () => {
+      if (!document.fullscreenElement) {
+        slideshowEl.requestFullscreen?.() || slideshowEl.webkitRequestFullscreen?.();
+      } else {
+        document.exitFullscreen?.() || document.webkitExitFullscreen?.();
+      }
+    };
+    document.addEventListener("fullscreenchange", () => {
+      slideshowEl.classList.toggle("fullscreen-mode", !!document.fullscreenElement);
+      expandBtn.textContent = document.fullscreenElement ? "⤢" : "⛶";
+    });
+  }
 }
 
 // ---------- Emotional Arc Chart ----------
@@ -279,3 +298,33 @@ if (arcEl) {
     arcEl.appendChild(step);
   });
 }
+
+// ---------- Mobile nav toggle ----------
+const navBurger = document.getElementById("navBurger");
+const navMobilePanel = document.getElementById("navMobilePanel");
+if (navBurger && navMobilePanel) {
+  navBurger.onclick = () => navMobilePanel.classList.toggle("open");
+  navMobilePanel.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => navMobilePanel.classList.remove("open"));
+  });
+}
+
+// ---------- Scroll-reveal ----------
+const revealEls = document.querySelectorAll(".reveal");
+if (revealEls.length && "IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+  revealEls.forEach((el) => revealObserver.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add("revealed"));
+}
+

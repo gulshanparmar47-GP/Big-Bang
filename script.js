@@ -251,21 +251,24 @@ if (slideFrame) {
     renderSlide();
   };
 
-  // Custom fullscreen: expand the whole slideshow card (video + nav bar together),
-  // not just the video, so Next/Previous/dots stay reachable while immersive.
+  // Custom immersive mode: expand the whole slideshow card (video/image + nav bar
+  // together) to fill the viewport using our own CSS, not the browser's native
+  // Fullscreen API — this guarantees identical, predictable behavior across every
+  // slide type (video, image, quiz, statement), since it never hands control to
+  // the browser or any individual media element.
   const slideshowEl = document.getElementById("slideshow");
   const expandBtn = document.getElementById("slideExpand");
   if (slideshowEl && expandBtn) {
-    expandBtn.onclick = () => {
-      if (!document.fullscreenElement) {
-        slideshowEl.requestFullscreen?.() || slideshowEl.webkitRequestFullscreen?.();
-      } else {
-        document.exitFullscreen?.() || document.webkitExitFullscreen?.();
-      }
+    const setImmersive = (on) => {
+      slideshowEl.classList.toggle("fullscreen-mode", on);
+      expandBtn.textContent = on ? "⤢" : "⛶";
+      document.body.style.overflow = on ? "hidden" : "";
     };
-    document.addEventListener("fullscreenchange", () => {
-      slideshowEl.classList.toggle("fullscreen-mode", !!document.fullscreenElement);
-      expandBtn.textContent = document.fullscreenElement ? "⤢" : "⛶";
+    expandBtn.onclick = () => setImmersive(!slideshowEl.classList.contains("fullscreen-mode"));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && slideshowEl.classList.contains("fullscreen-mode")) {
+        setImmersive(false);
+      }
     });
   }
 }

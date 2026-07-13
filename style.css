@@ -475,19 +475,29 @@ h1, h2, h3 {
 }
 .slideshow.fullscreen-mode {
   position: fixed;
-  inset: 0;
-  z-index: 999;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9999;
   border-radius: 0;
   display: flex;
   flex-direction: column;
   background: #000;
+  margin: 0;
 }
-.slideshow.fullscreen-mode .slide-frame { flex: 1; aspect-ratio: unset; }
+.slideshow.fullscreen-mode .slide-frame {
+  flex: 1 1 auto;
+  aspect-ratio: unset;
+  min-height: 0;
+}
 .slideshow.fullscreen-mode .slide-info { display: none; }
-.slideshow.fullscreen-mode .slide-controls { border-top: 1px solid rgba(255,255,255,0.15); background: #0a0a0f; }
+.slideshow.fullscreen-mode .slide-controls {
+  flex: 0 0 auto;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  background: #0a0a0f;
+}
 .slideshow.fullscreen-mode .slide-btn.ghost { color: var(--parchment); border-color: rgba(255,255,255,0.3); }
 .slideshow.fullscreen-mode .slide-dot { background: rgba(255,255,255,0.25); }
 .slideshow.fullscreen-mode .slide-dot.active { background: var(--sunfire); }
+.slideshow.fullscreen-mode .slide-expand-btn { color: var(--parchment); border-color: rgba(255,255,255,0.3); }
 .slide-frame {
   aspect-ratio: 16/9;
   background: var(--ink-soft);

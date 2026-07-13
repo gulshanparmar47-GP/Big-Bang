@@ -259,7 +259,15 @@ if (slideFrame) {
   const slideshowEl = document.getElementById("slideshow");
   const expandBtn = document.getElementById("slideExpand");
   if (slideshowEl && expandBtn) {
+    const placeholder = document.createComment("slideshow-anchor");
+    slideshowEl.after(placeholder);
+
     const setImmersive = (on) => {
+      if (on) {
+        document.body.appendChild(slideshowEl);
+      } else if (placeholder.parentNode) {
+        placeholder.parentNode.insertBefore(slideshowEl, placeholder);
+      }
       slideshowEl.classList.toggle("fullscreen-mode", on);
       expandBtn.textContent = on ? "⤢" : "⛶";
       document.body.style.overflow = on ? "hidden" : "";

@@ -2,13 +2,13 @@
 const slides = [
   {
     type: "video", title: "Age of Universe", emotion: "Curiosity",
-    src: "https://www.youtube.com/embed/nEL8c4-J3gg",
+    src: "https://www.youtube.com/embed/y6vyizUkCVI",
     onscreen: "How Old Are You? How Old Is Earth? How Old Is The Universe?",
     narration: "You probably know your age. Perhaps your parents' age too. But have you ever wondered how old the Earth is? Or how old the Universe is? To answer that question, we must travel billions of years into the past.",
   },
   {
     type: "video", title: "Big Bang", emotion: "Awe",
-    src: "https://www.youtube.com/embed/p2WPOKuex2c",
+    src: "https://www.youtube.com/embed/A1_1htP1LcI",
     onscreen: "13.8 Billion Years Ago: The Beginning Of Our Story",
     narration: "Around 13.8 billion years ago, the Universe began expanding from an extremely hot and dense state. Scientists call this event the Big Bang. From this beginning came space, time, stars, galaxies, planets and eventually us.",
   },
@@ -20,31 +20,31 @@ const slides = [
   },
   {
     type: "video", title: "Galaxies", emotion: "Wonder",
-    src: "https://www.youtube.com/embed/Z3mFCii8bds",
+    src: "https://www.youtube.com/embed/AwgD-EWQZvU",
     onscreen: "Welcome To The Milky Way: Our Galactic Home",
     narration: "As matter gathered under gravity, vast collections of stars formed galaxies. Our home is the Milky Way, containing hundreds of billions of stars. Yet among all those stars lies one small planet that would eventually support life.",
   },
   {
     type: "video", title: "Sun", emotion: "Gratitude & Wonder",
-    src: "https://www.youtube.com/embed/sn2HkMfArdk",
+    src: "https://www.youtube.com/embed/zgcDOGkbWcg",
     onscreen: "4.6 Billion Years Ago: A New Star Is Born",
     narration: "About 4.6 billion years ago, gravity pulled together a vast cloud of gas and dust. As the cloud collapsed, temperatures rose and a new star was born \u2014 one of the key reasons for survival of our planet and life therein. Without it, our planet would be a frozen and lifeless world.",
   },
   {
     type: "video", title: "Earth", emotion: "Satisfaction",
-    src: "https://www.youtube.com/embed/2_XApar-a5Y",
+    src: "https://www.youtube.com/embed/pjzcY3TPK24",
     onscreen: "Earth Is Born: 4.54 Billion Years Ago",
     narration: "About 4.54 billion years ago, dust and rock orbiting the young Sun gradually came together to form Earth. What began as a hot, hostile world would eventually become our home.",
   },
   {
-    type: "video", title: "Moon", emotion: "Fascination",
-    src: "https://www.youtube.com/embed/kQQYCWyz_sQ",
+    type: "image", title: "Moon", emotion: "Fascination",
+    src: "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/lunar-science/internal_resources/585/Moon_formation_illustration.jpeg?w=1200",
     onscreen: "Earth's Closest Companion: The Moon",
     narration: "Scientists believe the Moon formed after a giant collision between the early Earth and a Mars-sized object. The Moon helped stabilize Earth's tilt, creating the conditions that allowed life to flourish.",
   },
   {
     type: "video", title: "First Life", emotion: "Hope",
-    src: "https://www.youtube.com/embed/1xWLL-7SNW8",
+    src: "https://www.youtube.com/embed/rKGjxV9bLXE",
     onscreen: "Life Begins: 3.5 Billion Years Ago",
     narration: "As Earth cooled and oceans formed, simple chemical compounds interacted for millions of years. Eventually, the first single-celled organisms appeared, marking the beginning of life on Earth.",
   },

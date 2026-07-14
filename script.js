@@ -339,3 +339,80 @@ if (revealEls.length && "IntersectionObserver" in window) {
   revealEls.forEach((el) => el.classList.add("revealed"));
 }
 
+// ---------- Customer Success: click-to-reveal dialogue scene ----------
+const csDialogue = [
+  { speaker: "Anya", side: "left", text: "Okay, be honest — which brand would you actually defend in an argument?" },
+  { speaker: "Dev", side: "right", text: "Probably Adobe. Not because the tools are unique, but because it's actually gotten me where I was trying to go." },
+  { speaker: "Anya", side: "left", text: "Huh — so it's not really about support or service then?" },
+  { speaker: "Dev", side: "right", text: "Exactly. It's the discipline of making sure customers actually reach their goals. That's Customer Success." },
+];
+
+const dsceneEl = document.getElementById("dscene");
+if (dsceneEl) {
+  const dsceneProgress = document.getElementById("dsceneProgress");
+  const dsceneHint = document.getElementById("dsceneHint");
+  const dsceneDots = document.getElementById("dsceneDots");
+  const dsceneReplay = document.getElementById("dsceneReplay");
+
+  // bubble anchor positions, tuned to this specific scene image (percentages)
+  const positions = {
+    left: { left: "6%", top: "10%" },
+    right: { right: "6%", top: "6%" },
+  };
+
+  let dIndex = -1; // -1 = not started
+  let bubble = null;
+
+  function buildDots() {
+    dsceneDots.innerHTML = "";
+    csDialogue.forEach((_, i) => {
+      const dot = document.createElement("div");
+      dot.className = "slide-dot" + (i <= dIndex ? " active" : "");
+      dsceneDots.appendChild(dot);
+    });
+  }
+
+  function showLine(i) {
+    const line = csDialogue[i];
+    if (bubble) bubble.remove();
+    bubble = document.createElement("div");
+    bubble.className = `dbubble ${line.side}`;
+    const pos = positions[line.side];
+    Object.assign(bubble.style, pos);
+    bubble.innerHTML = `<div class="dbubble-name">${line.speaker}</div><p class="dbubble-text">${line.text}</p>`;
+    dsceneEl.appendChild(bubble);
+    requestAnimationFrame(() => requestAnimationFrame(() => bubble.classList.add("visible")));
+
+    dsceneProgress.textContent = `Line ${i + 1} of ${csDialogue.length}`;
+    buildDots();
+
+    if (i === csDialogue.length - 1) {
+      dsceneHint.textContent = "Conversation complete — tap Replay to hear it again";
+    } else {
+      dsceneHint.textContent = "Tap the scene to continue →";
+    }
+  }
+
+  function resetScene() {
+    dIndex = -1;
+    if (bubble) { bubble.remove(); bubble = null; }
+    dsceneProgress.textContent = "Tap to begin";
+    dsceneHint.textContent = "Tap the scene to continue →";
+    dsceneHint.style.display = "";
+    buildDots();
+  }
+
+  dsceneEl.addEventListener("click", () => {
+    if (dIndex >= csDialogue.length - 1) return;
+    dIndex++;
+    showLine(dIndex);
+  });
+
+  dsceneReplay.addEventListener("click", (e) => {
+    e.stopPropagation();
+    resetScene();
+  });
+
+  resetScene();
+}
+

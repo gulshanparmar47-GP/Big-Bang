@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study — Customer Success | Gulshan Parmar</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="Customer Success — Case Study by Gulshan Parmar">
+<meta property="og:description" content="An instructional design case study on Customer Success: from first sale to earned retention.">
+<meta property="og:image" content="images/cs-slide1.jpg">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-mark" href="index.html">Gulshan Parmar</a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="index.html">← All work</a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="wrap">
+    <div class="nav-mobile-panel" id="navMobilePanel">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-hero">
+  <div class="wrap">
+    <a class="back-link" href="index.html">← Back to all work</a>
+    <span class="eyebrow">Case Study 02 · Scenario-Based Learning</span>
+    <h1>Customer Success: From First Sale to Earned Retention</h1>
+
+    <dl class="cs-meta">
+      <div><dt>Audience</dt><dd>New Customer Success hires, self-paced</dd></div>
+      <div><dt>Format</dt><dd>Illustrated scenario with click-to-reveal dialogue</dd></div>
+      <div><dt>My Role</dt><dd>Instructional designer, scriptwriter, storyboard, interaction build</dd></div>
+      <div><dt>Status</dt><dd>In progress — Slide 1 of a multi-slide narrative</dd></div>
+    </dl>
+
+    <div class="tools-row">
+      <span class="tool-tag"><span class="dot"></span>Excel — Storyboarding</span>
+      <span class="tool-tag"><span class="dot"></span>Adobe Firefly — Character & Scene Art</span>
+      <span class="tool-tag"><span class="dot"></span>HTML / CSS / JS — Hand-Coded Interactivity</span>
+    </div>
+  </div>
+</header>
+
+<section class="section section-tight reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The Problem</span>
+      <h2>"Customer Success" is often confused with "customer support."</h2>
+      <p>New CS hires frequently start the role thinking their job is reactive — answer tickets, fix
+      issues, keep people happy. This module reframes Customer Success as a proactive discipline:
+      reading signals early, checking in before being asked, and measuring success by whether the
+      customer actually achieved their goal — not just whether a case was closed. The learning
+      objective: by the end of the module, a learner should be able to distinguish proactive CS
+      judgment calls (health scoring, QBRs, triage) from reactive support instincts, and apply that
+      judgment to realistic decision points.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tight reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The Artifact</span>
+      <h2>Slide 1 — Defining Customer Success</h2>
+      <p>Click anywhere on the scene to reveal each line of dialogue, alternating between the two
+      characters. This scenario-based format was chosen deliberately over narrated video: it puts the
+      learner in control of pacing, and framing the concept as a real conversation between peers makes
+      an abstract definition land more naturally than a straight narration would.</p>
+    </div>
+
+    <div class="dscene" id="dscene">
+      <img src="images/cs-slide1.jpg" alt="Two colleagues chatting over coffee in a corporate cafeteria">
+      <div class="dscene-progress" id="dsceneProgress">Tap to begin</div>
+      <div class="dscene-hint" id="dsceneHint">Tap the scene to continue →</div>
+    </div>
+
+    <div class="dscene-controls">
+      <button class="dscene-replay" id="dsceneReplay">↺ Replay conversation</button>
+      <div class="dscene-dots" id="dsceneDots"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tight reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Design Rationale</span>
+      <h2>Why a conversation, not a narrator</h2>
+    </div>
+    <div class="rationale-grid">
+      <div class="rationale-card">
+        <span class="num">01</span>
+        <h3>Peer framing over authority framing</h3>
+        <p>A narrator stating a definition reads as being told something. Two colleagues arriving at
+        the same insight through conversation reads as discovering it — a small shift that changes
+        how much a learner actually internalizes a definition versus just hearing it.</p>
+      </div>
+      <div class="rationale-card">
+        <span class="num">02</span>
+        <h3>Learner-paced reveal</h3>
+        <p>Click-to-advance (rather than autoplay) puts pacing control in the learner's hands,
+        appropriate for a definitional/conceptual screen where rushing past the core idea would
+        undercut the rest of the module.</p>
+      </div>
+      <div class="rationale-card">
+        <span class="num">03</span>
+        <h3>The payoff line lands last</h3>
+        <p>The actual definition — "the discipline of making sure customers reach their goals" — is
+        deliberately the final line, not the first. The conversation builds toward it rather than
+        opening with it, mirroring how the concept should land for a new hire encountering it for the
+        real first time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Coming Next</span>
+      <h2>This is one slide of a longer narrative</h2>
+      <p>The full storyboard follows one customer's journey from research through purchase, a support
+      breakdown, and — the more advanced material — the internal CS judgment calls behind the scenes:
+      reading a Customer Health Score before a customer complains, running a Quarterly Business Review
+      as a proactive check-in rather than a disguised upsell, and triaging two simultaneous support
+      tickets by severity rather than account size. Each future slide will extend this same
+      click-to-reveal format as its own scene.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer">
+    <span>Gulshan Parmar — Instructional Designer</span>
+    <a href="index.html">← Back to all work</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

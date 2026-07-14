@@ -369,8 +369,43 @@ const csScenes = [
     alt: "Anya researching content creation tools on her laptop late at night in her bedroom",
     context: "Late at night, Anya researches content-creation tools. She isn't shopping for software — she's shopping for an outcome. Customer Success starts before the sale.",
     lines: [
-      { speaker: "Anya", side: "left", audio: "audio/cs-2-1.mp3", text: "Woah god! So many brands and such varied tools. Let me just call them to understand better." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-2-2.mp3", text: "Hopefully this call actually helps me figure out what I need — not just another sales pitch." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-2-1.mp3", text: "Woah — so many brands, so many tools. I can't tell which of these actually fits what I'm trying to build." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-2-2.mp3", text: "Let me just call them. Hopefully someone helps me figure out what I need — not just another sales pitch." },
+    ],
+  },
+  {
+    title: "The Advisory Call",
+    emotion: "Reassurance",
+    img: "images/cs-slide3.jpg",
+    alt: "Split screen: Anya on a video call at home at night, and Meera the sales advisor in a corporate office wearing a headset",
+    context: "Meera talks Anya out of buying more than she needs. That single choice demonstrates the Customer Success principle better than any definition could — she optimises for Anya's outcome, not the invoice.",
+    lines: [
+      { speaker: "Anya", side: "left", audio: "audio/cs-3-1.mp3", text: "So based on what I'm doing, would this set of tools actually be a good starting point?" },
+      { speaker: "Meera", side: "right", audio: "audio/cs-3-2.mp3", text: "For where you are right now — yes. You've just started creating content. Start with these three, and add the rest when you actually need them." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-3-3.mp3", text: "That's the first honest answer I've gotten all week." },
+    ],
+  },
+  {
+    title: "The Purchase",
+    emotion: "Delight",
+    img: "images/cs-slide4.jpg",
+    alt: "Anya sitting on her bed at night, smiling at a completed checkout screen on her laptop",
+    context: "A frictionless first win. Onboarding is the first promise a company keeps — or breaks.",
+    lines: [
+      { speaker: "Anya", side: "left", audio: "audio/cs-4-1.mp3", text: "That was… genuinely easy. Account's set up, and I can start on my first project tonight." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-4-2.mp3", text: "If the rest of it is like this, I'm not going anywhere." },
+    ],
+  },
+  {
+    title: "The Breakdown",
+    emotion: "Frustration",
+    img: "images/cs-slide5.jpg",
+    alt: "Anya at her desk in the morning, visibly frustrated on the phone, laptop showing LOGIN FAILED",
+    context: "The failure Customer Success exists to repair. Note what's actually broken here — not the software, but the ownership. Three people, three instructions, nobody accountable.",
+    lines: [
+      { speaker: "Anya", side: "right", audio: "audio/cs-5-1.mp3", text: "This is the third time I've called about this. I've followed every instruction, from three different people." },
+      { speaker: "Anya", side: "right", audio: "audio/cs-5-2.mp3", text: "Nobody's actually fixed it. They just keep passing me along." },
+      { speaker: "Anya", side: "right", audio: "audio/cs-5-3.mp3", text: "I'm calling support again. Let's see if anyone owns this." },
     ],
   },
 ];

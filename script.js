@@ -320,6 +320,14 @@ if (navBurger && navMobilePanel) {
   });
 }
 
+// ---------- Nav depth on scroll ----------
+const navEl = document.querySelector(".nav");
+if (navEl) {
+  const onScroll = () => navEl.classList.toggle("scrolled", window.scrollY > 12);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+}
+
 // ---------- Scroll-reveal ----------
 const revealEls = document.querySelectorAll(".reveal");
 if (revealEls.length && "IntersectionObserver" in window) {
@@ -339,73 +347,170 @@ if (revealEls.length && "IntersectionObserver" in window) {
   revealEls.forEach((el) => el.classList.add("revealed"));
 }
 
-// ---------- Customer Success: click-to-reveal dialogue scene ----------
-const csDialogue = [
-  { speaker: "Anya", side: "left", text: "Okay, be honest — which brand would you actually defend in an argument?" },
-  { speaker: "Dev", side: "right", text: "Probably Adobe. Not because the tools are unique, but because it's actually gotten me where I was trying to go." },
-  { speaker: "Anya", side: "left", text: "Huh — so it's not really about support or service then?" },
-  { speaker: "Dev", side: "right", text: "Exactly. It's the discipline of making sure customers actually reach their goals. That's Customer Success." },
+// ---------- Customer Success: multi-scene click-to-reveal dialogue ----------
+const csScenes = [
+  {
+    title: "Defining Customer Success",
+    emotion: "Curiosity",
+    img: "images/cs-slide1.jpg",
+    alt: "Two colleagues chatting over coffee in a corporate cafeteria",
+    context: "Two colleagues debate brand loyalty over coffee — and arrive at the definition of Customer Success themselves.",
+    lines: [
+      { speaker: "Anya", side: "left", audio: "audio/cs-1-1.mp3", text: "Okay, be honest — which brand would you actually defend in an argument?" },
+      { speaker: "Dev", side: "right", audio: "audio/cs-1-2.mp3", text: "Probably Adobe. Not because the tools are unique, but because it's actually gotten me where I was trying to go." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-1-3.mp3", text: "Huh — so it's not really about support or service then?" },
+      { speaker: "Dev", side: "right", audio: "audio/cs-1-4.mp3", text: "Exactly. It's the discipline of making sure customers actually reach their goals. That's Customer Success." },
+    ],
+  },
+  {
+    title: "The Customer's Need",
+    emotion: "Aspiration",
+    img: "images/cs-slide2.jpg",
+    alt: "Anya researching content creation tools on her laptop late at night in her bedroom",
+    context: "Late at night, Anya researches content-creation tools. She isn't shopping for software — she's shopping for an outcome. Customer Success starts before the sale.",
+    lines: [
+      { speaker: "Anya", side: "left", audio: "audio/cs-2-1.mp3", text: "Woah god! So many brands and such varied tools. Let me just call them to understand better." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-2-2.mp3", text: "Hopefully this call actually helps me figure out what I need — not just another sales pitch." },
+    ],
+  },
 ];
 
-const dsceneEl = document.getElementById("dscene");
-if (dsceneEl) {
+const csShowEl = document.getElementById("csShow");
+if (csShowEl) {
+  const dsceneEl = document.getElementById("dscene");
+  const dsceneImg = document.getElementById("dsceneImg");
   const dsceneProgress = document.getElementById("dsceneProgress");
   const dsceneHint = document.getElementById("dsceneHint");
   const dsceneDots = document.getElementById("dsceneDots");
   const dsceneReplay = document.getElementById("dsceneReplay");
+  const csSlideProgress = document.getElementById("csSlideProgress");
+  const csSlideTitle = document.getElementById("csSlideTitle");
+  const csSlideEmotion = document.getElementById("csSlideEmotion");
+  const csSlideContext = document.getElementById("csSlideContext");
+  const csPrev = document.getElementById("csPrev");
+  const csNext = document.getElementById("csNext");
+  const csDots = document.getElementById("csDots");
+  const csExpand = document.getElementById("csExpand");
 
-  // bubble anchor positions, tuned to this specific scene image (percentages)
-  const positions = {
-    left: { left: "6%", top: "10%" },
-    right: { right: "6%", top: "6%" },
+  // Bubble anchor positions, tuned per side. Audio is optional: if a clip is not
+  // yet recorded, the line still reveals silently rather than breaking the flow.
+  const bubblePos = {
+    left: { left: "5%", top: "8%" },
+    right: { right: "5%", top: "5%" },
   };
 
-  let dIndex = -1; // -1 = not started
+  let sceneIndex = 0;
+  let lineIndex = -1;
   let bubble = null;
+  let currentAudio = null;
 
-  function buildDots() {
+  function stopAudio() {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+      currentAudio = null;
+    }
+  }
+
+  function playLineAudio(src) {
+    stopAudio();
+    if (!src) return;
+    const a = new Audio(src);
+    currentAudio = a;
+    // Audio may legitimately not exist yet (still being recorded) — fail silently
+    // so the visual dialogue flow is never blocked by a missing file.
+    a.play().catch(() => {});
+  }
+
+  function buildLineDots() {
+    const scene = csScenes[sceneIndex];
     dsceneDots.innerHTML = "";
-    csDialogue.forEach((_, i) => {
+    scene.lines.forEach((_, i) => {
       const dot = document.createElement("div");
-      dot.className = "slide-dot" + (i <= dIndex ? " active" : "");
+      dot.className = "slide-dot" + (i <= lineIndex ? " active" : "");
       dsceneDots.appendChild(dot);
     });
   }
 
+  function buildSceneDots() {
+    csDots.innerHTML = "";
+    csScenes.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.className = "slide-dot" + (i === sceneIndex ? " active" : "");
+      dot.setAttribute("aria-label", `Go to scene ${i + 1}`);
+      dot.onclick = (e) => {
+        e.stopPropagation();
+        sceneIndex = i;
+        renderScene();
+      };
+      csDots.appendChild(dot);
+    });
+  }
+
   function showLine(i) {
-    const line = csDialogue[i];
+    const scene = csScenes[sceneIndex];
+    const line = scene.lines[i];
     if (bubble) bubble.remove();
+
     bubble = document.createElement("div");
     bubble.className = `dbubble ${line.side}`;
-    const pos = positions[line.side];
-    Object.assign(bubble.style, pos);
-    bubble.innerHTML = `<div class="dbubble-name">${line.speaker}</div><p class="dbubble-text">${line.text}</p>`;
+    Object.assign(bubble.style, bubblePos[line.side]);
+    bubble.setAttribute("role", "status");
+    bubble.innerHTML =
+      `<div class="dbubble-name">${line.speaker}</div>` +
+      `<p class="dbubble-text">${line.text}</p>`;
     dsceneEl.appendChild(bubble);
-    requestAnimationFrame(() => requestAnimationFrame(() => bubble.classList.add("visible")));
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => bubble.classList.add("visible"))
+    );
 
-    dsceneProgress.textContent = `Line ${i + 1} of ${csDialogue.length}`;
-    buildDots();
+    playLineAudio(line.audio);
 
-    if (i === csDialogue.length - 1) {
-      dsceneHint.textContent = "Conversation complete — tap Replay to hear it again";
+    dsceneProgress.textContent = `Line ${i + 1} of ${scene.lines.length}`;
+    buildLineDots();
+
+    if (i === scene.lines.length - 1) {
+      dsceneHint.textContent =
+        sceneIndex < csScenes.length - 1
+          ? "Scene complete — tap Next to continue →"
+          : "Scene complete — tap Replay to hear it again";
     } else {
       dsceneHint.textContent = "Tap the scene to continue →";
     }
   }
 
   function resetScene() {
-    dIndex = -1;
-    if (bubble) { bubble.remove(); bubble = null; }
+    stopAudio();
+    lineIndex = -1;
+    if (bubble) {
+      bubble.remove();
+      bubble = null;
+    }
     dsceneProgress.textContent = "Tap to begin";
     dsceneHint.textContent = "Tap the scene to continue →";
-    dsceneHint.style.display = "";
-    buildDots();
+    buildLineDots();
+  }
+
+  function renderScene() {
+    const scene = csScenes[sceneIndex];
+    dsceneImg.src = scene.img;
+    dsceneImg.alt = scene.alt;
+    csSlideProgress.textContent = `Scene ${sceneIndex + 1} of ${csScenes.length}`;
+    csSlideTitle.textContent = scene.title;
+    csSlideEmotion.textContent = scene.emotion;
+    csSlideContext.textContent = scene.context;
+    csPrev.disabled = sceneIndex === 0;
+    csNext.textContent =
+      sceneIndex === csScenes.length - 1 ? "Restart ↺" : "Next →";
+    buildSceneDots();
+    resetScene();
   }
 
   dsceneEl.addEventListener("click", () => {
-    if (dIndex >= csDialogue.length - 1) return;
-    dIndex++;
-    showLine(dIndex);
+    const scene = csScenes[sceneIndex];
+    if (lineIndex >= scene.lines.length - 1) return;
+    lineIndex++;
+    showLine(lineIndex);
   });
 
   dsceneReplay.addEventListener("click", (e) => {
@@ -413,6 +518,41 @@ if (dsceneEl) {
     resetScene();
   });
 
-  resetScene();
-}
+  csPrev.addEventListener("click", () => {
+    if (sceneIndex > 0) {
+      sceneIndex--;
+      renderScene();
+    }
+  });
 
+  csNext.addEventListener("click", () => {
+    sceneIndex = sceneIndex === csScenes.length - 1 ? 0 : sceneIndex + 1;
+    renderScene();
+  });
+
+  // Immersive mode — same CSS-only approach as Big Bang (no native Fullscreen API),
+  // re-parented to body so no ancestor transform can break position:fixed.
+  const csPlaceholder = document.createComment("cs-show-anchor");
+  csShowEl.after(csPlaceholder);
+  const setCsImmersive = (on) => {
+    if (on) {
+      document.body.appendChild(csShowEl);
+    } else if (csPlaceholder.parentNode) {
+      csPlaceholder.parentNode.insertBefore(csShowEl, csPlaceholder);
+    }
+    csShowEl.classList.toggle("fullscreen-mode", on);
+    csExpand.textContent = on ? "⤢" : "⛶";
+    document.body.style.overflow = on ? "hidden" : "";
+  };
+  csExpand.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setCsImmersive(!csShowEl.classList.contains("fullscreen-mode"));
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && csShowEl.classList.contains("fullscreen-mode")) {
+      setCsImmersive(false);
+    }
+  });
+
+  renderScene();
+}

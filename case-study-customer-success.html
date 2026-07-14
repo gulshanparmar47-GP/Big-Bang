@@ -44,14 +44,14 @@
 
     <dl class="cs-meta">
       <div><dt>Audience</dt><dd>New Customer Success hires, self-paced</dd></div>
-      <div><dt>Format</dt><dd>Illustrated scenario with click-to-reveal dialogue</dd></div>
+      <div><dt>Format</dt><dd>Illustrated scenario, click-to-reveal dialogue</dd></div>
       <div><dt>My Role</dt><dd>Instructional designer, scriptwriter, storyboard, interaction build</dd></div>
-      <div><dt>Status</dt><dd>In progress — Slide 1 of a multi-slide narrative</dd></div>
+      <div><dt>Status</dt><dd>In progress — 2 of 13 scenes built</dd></div>
     </dl>
 
     <div class="tools-row">
       <span class="tool-tag"><span class="dot"></span>Excel — Storyboarding</span>
-      <span class="tool-tag"><span class="dot"></span>Adobe Firefly — Character & Scene Art</span>
+      <span class="tool-tag"><span class="dot"></span>Adobe Firefly — Character &amp; Scene Art</span>
       <span class="tool-tag"><span class="dot"></span>HTML / CSS / JS — Hand-Coded Interactivity</span>
     </div>
   </div>
@@ -77,27 +77,42 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">The Artifact</span>
-      <h2>Slide 1 — Defining Customer Success</h2>
-      <p>Click anywhere on the scene to reveal each line of dialogue, alternating between the two
-      characters. This scenario-based format was chosen deliberately over narrated video: it puts the
-      learner in control of pacing, and framing the concept as a real conversation between peers makes
-      an abstract definition land more naturally than a straight narration would.</p>
+      <h2>Walk through the scenario</h2>
+      <p>Tap the scene to reveal each line — dialogue and narration arrive together on the same tap,
+      rather than as separate read-then-listen phases. Use Next to move between scenes, and the expand
+      icon for an immersive view.</p>
     </div>
 
-    <div class="dscene" id="dscene">
-      <img src="images/cs-slide1.jpg" alt="Two colleagues chatting over coffee in a corporate cafeteria">
-      <div class="dscene-progress" id="dsceneProgress">Tap to begin</div>
-      <div class="dscene-hint" id="dsceneHint">Tap the scene to continue →</div>
+    <div class="slideshow" id="csShow">
+      <div class="dscene" id="dscene">
+        <img id="dsceneImg" src="images/cs-slide1.jpg" alt="Two colleagues chatting over coffee in a corporate cafeteria">
+        <div class="dscene-progress" id="dsceneProgress">Tap to begin</div>
+        <div class="dscene-hint" id="dsceneHint">Tap the scene to continue →</div>
+      </div>
+      <div class="slide-info">
+        <div class="slide-progress" id="csSlideProgress">Scene 1 of 2</div>
+        <h3>
+          <span id="csSlideTitle"></span>
+          <span class="slide-emotion" id="csSlideEmotion"></span>
+        </h3>
+        <p id="csSlideContext"></p>
+      </div>
+      <div class="slide-controls">
+        <button class="slide-btn ghost" id="csPrev">← Previous</button>
+        <div class="slide-dots" id="csDots"></div>
+        <button class="slide-expand-btn" id="csExpand" aria-label="Toggle immersive view">⛶</button>
+        <button class="slide-btn" id="csNext">Next →</button>
+      </div>
     </div>
 
     <div class="dscene-controls">
-      <button class="dscene-replay" id="dsceneReplay">↺ Replay conversation</button>
+      <button class="dscene-replay" id="dsceneReplay">↺ Replay this scene</button>
       <div class="dscene-dots" id="dsceneDots"></div>
     </div>
   </div>
 </section>
 
-<section class="section section-tight reveal">
+<section class="section section-dark reveal">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">Design Rationale</span>
@@ -108,24 +123,57 @@
         <span class="num">01</span>
         <h3>Peer framing over authority framing</h3>
         <p>A narrator stating a definition reads as being told something. Two colleagues arriving at
-        the same insight through conversation reads as discovering it — a small shift that changes
-        how much a learner actually internalizes a definition versus just hearing it.</p>
+        the same insight through conversation reads as discovering it — a small shift that changes how
+        much a learner internalizes a definition versus merely hearing it.</p>
       </div>
       <div class="rationale-card">
         <span class="num">02</span>
-        <h3>Learner-paced reveal</h3>
-        <p>Click-to-advance (rather than autoplay) puts pacing control in the learner's hands,
-        appropriate for a definitional/conceptual screen where rushing past the core idea would
-        undercut the rest of the module.</p>
+        <h3>Audio and text arrive together</h3>
+        <p>Each tap reveals the line and plays its narration simultaneously. Separating them — read
+        first, listen after — creates a temporal contiguity mismatch that measurably weakens
+        comprehension (Mayer's multimedia principles). Synchronising them avoids it.</p>
       </div>
       <div class="rationale-card">
         <span class="num">03</span>
         <h3>The payoff line lands last</h3>
         <p>The actual definition — "the discipline of making sure customers reach their goals" — is
-        deliberately the final line, not the first. The conversation builds toward it rather than
-        opening with it, mirroring how the concept should land for a new hire encountering it for the
-        real first time.</p>
+        deliberately the final line of Scene 1, not the first. The conversation builds toward it,
+        mirroring how the concept should land for a new hire encountering it for real.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tight reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Storyboard → Screen</span>
+      <h2>How the source script was adapted</h2>
+      <p>The original storyboard was written in a single-narrator voice. Converting it to a scenario
+      format meant the dialogue had to carry the same instructional content the monologue would have —
+      not sit alongside it. Below: what the script intended, and how it was reworked.</p>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="sb-table">
+        <thead>
+          <tr><th>Scene</th><th>Purpose</th><th>Original narration intent</th><th>Adapted as</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="sb-screen">Defining Customer Success</td>
+            <td>Introduce concept</td>
+            <td>Loyalty isn't built by the product alone — it's built by whether the brand helped you achieve what you set out to do.</td>
+            <td>Two colleagues debating brand loyalty, arriving at the definition themselves</td>
+          </tr>
+          <tr>
+            <td class="sb-screen">The Customer's Need</td>
+            <td>Establish context</td>
+            <td>She isn't shopping for software — she's shopping for an outcome. Customer Success starts before the sale, not after it.</td>
+            <td>Solo thinking-aloud monologue during late-night research</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -134,13 +182,12 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">Coming Next</span>
-      <h2>This is one slide of a longer narrative</h2>
-      <p>The full storyboard follows one customer's journey from research through purchase, a support
-      breakdown, and — the more advanced material — the internal CS judgment calls behind the scenes:
-      reading a Customer Health Score before a customer complains, running a Quarterly Business Review
-      as a proactive check-in rather than a disguised upsell, and triaging two simultaneous support
-      tickets by severity rather than account size. Each future slide will extend this same
-      click-to-reveal format as its own scene.</p>
+      <h2>Eleven more scenes in the storyboard</h2>
+      <p>The full narrative follows one customer from research through purchase, a support breakdown,
+      and then the internal CS judgment calls behind the scenes: reading a Customer Health Score before
+      a customer complains, running a Quarterly Business Review as a proactive check-in rather than a
+      disguised upsell, and triaging two simultaneous tickets by severity rather than account size.
+      Two gated decision points test that judgment directly.</p>
     </div>
   </div>
 </section>

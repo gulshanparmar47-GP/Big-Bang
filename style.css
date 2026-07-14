@@ -193,8 +193,33 @@ h1, h2, h3 {
   filter: blur(10px);
   pointer-events: none;
   z-index: 0;
+  animation: orbDrift 18s ease-in-out infinite alternate;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -140px;
+  left: -120px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(23,179,163,0.18) 0%, rgba(224,90,46,0.12) 50%, transparent 72%);
+  border-radius: 50%;
+  filter: blur(14px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbDrift 22s ease-in-out infinite alternate-reverse;
+}
+@keyframes orbDrift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-28px, 24px) scale(1.08); }
 }
 .hero .wrap { position: relative; z-index: 1; }
+
+/* nav gains depth once you scroll */
+.nav.scrolled {
+  box-shadow: 0 4px 24px rgba(20,21,28,0.08);
+  border-bottom-color: transparent;
+}
 .hero .eyebrow { color: var(--ember); }
 .hero h1 {
   font-size: clamp(38px, 6vw, 64px);
@@ -890,11 +915,10 @@ h1, h2, h3 {
 /* dialogue scene (Customer Success) */
 .dscene {
   position: relative;
-  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(20,21,28,0.12);
   cursor: pointer;
   user-select: none;
+  background: #0d1020;
 }
 .dscene img {
   width: 100%;
@@ -902,6 +926,19 @@ h1, h2, h3 {
   pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
+}
+/* inside immersive mode, the scene fills available height */
+.slideshow.fullscreen-mode .dscene {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slideshow.fullscreen-mode .dscene img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .dscene-progress {
   position: absolute;

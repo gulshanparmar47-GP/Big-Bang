@@ -408,6 +408,50 @@ const csScenes = [
       { speaker: "Anya", side: "right", audio: "audio/cs-5-3.mp3", text: "I'm calling support again. Let's see if anyone owns this." },
     ],
   },
+  {
+    type: "decision",
+    title: "Decision Point: Rebuilding Trust",
+    emotion: "Tension → Insight",
+    img: "images/cs-slide6.jpg",
+    alt: "Ravi, Customer Success Manager, listening intently on a headset at his office desk",
+    context: "A gated judgment call. The learner cannot continue until they identify the response that actually rebuilds trust — not merely the one that sounds most polite.",
+    setup: "Anya says: \"This is the third time I've called about the same error, and nothing's fixed.\"",
+    question: "Which response actually rebuilds trust?",
+    options: [
+      { key: "A", text: "\"I'll transfer you to a specialist who can help.\"" },
+      { key: "B", text: "\"Let me send you our troubleshooting guide.\"" },
+      { key: "C", text: "\"I'm personally taking ownership of this — you'll hear from me within 24 hours with a fix, not another transfer.\"" },
+      { key: "D", text: "\"I'll mark this as urgent internally.\"" },
+    ],
+    correct: "C",
+    correctFeedback: "Correct — and not because the others are wrong in isolation. A third repeat contact means self-serve and transfers have already failed her twice. What she needs now is ownership and a named person, not another handoff.",
+    incorrectFeedback: "Not quite. Each of these is a reasonable first response — but this is her third call. She has already been transferred and already tried the guide. Repeating a step that has failed twice reads as deflection, however politely it's phrased.",
+  },
+  {
+    title: "Reading the Health Score",
+    emotion: "Confidence",
+    img: "images/cs-slide7.jpg",
+    alt: "Ravi reviewing a dashboard showing a rising green usage graph and a health score of 91, marked healthy",
+    context: "The core discipline of the role: a health score is a leading indicator. Ravi acts on good news, not just bad news — which is precisely what separates Customer Success from support.",
+    lines: [
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-1.mp3", text: "Health score's at 91. Usage is steady, no open tickets, and she's adopted four of the five core features." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-2.mp3", text: "Nothing's wrong. Which is exactly when most teams do nothing at all." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-3.mp3", text: "I'll set up a check-in anyway — I'd rather hear how it's going while it's going well." },
+    ],
+  },
+  {
+    title: "The QBR",
+    emotion: "Partnership",
+    img: "images/cs-slide8.jpg",
+    alt: "Split screen: Anya at home and Ravi in his office, both reviewing the same shared monthly review document on a video call",
+    context: "A Quarterly Business Review done properly is a goals review, not a disguised upsell. Ravi solves her problem with a feature she already pays for — and Anya notices.",
+    lines: [
+      { speaker: "Ravi", side: "right", audio: "audio/cs-8-1.mp3", text: "Last quarter you said your goal was to publish twice a week. Where did that actually land?" },
+      { speaker: "Anya", side: "left", audio: "audio/cs-8-2.mp3", text: "Honestly? Closer to once. The editing step is where I keep losing time." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-8-3.mp3", text: "That's useful. There's a batch-export feature you're not using — it's included in what you already pay for." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-8-4.mp3", text: "You're… not trying to sell me anything right now, are you?" },
+    ],
+  },
 ];
 
 const csShowEl = document.getElementById("csShow");
@@ -438,6 +482,15 @@ if (csShowEl) {
   let lineIndex = -1;
   let bubble = null;
   let currentAudio = null;
+  const decisionPassed = {};
+
+  function isGatedBefore(target) {
+    // A learner may not jump past a decision scene they have not yet solved.
+    for (let i = 0; i < target; i++) {
+      if (csScenes[i].type === "decision" && !decisionPassed[i]) return true;
+    }
+    return false;
+  }
 
   function stopAudio() {
     if (currentAudio) {
@@ -457,9 +510,69 @@ if (csShowEl) {
     a.play().catch(() => {});
   }
 
+  function buildDecision(scene) {
+    dsceneEl.classList.add("decision-mode");
+
+    const panel = document.createElement("div");
+    panel.className = "dpanel";
+
+    const setup = document.createElement("p");
+    setup.className = "dpanel-setup";
+    setup.textContent = scene.setup;
+    panel.appendChild(setup);
+
+    const q = document.createElement("h4");
+    q.className = "dpanel-q";
+    q.textContent = scene.question;
+    panel.appendChild(q);
+
+    const opts = document.createElement("div");
+    opts.className = "dpanel-opts";
+    panel.appendChild(opts);
+
+    const fb = document.createElement("div");
+    fb.className = "dpanel-fb";
+    panel.appendChild(fb);
+
+    scene.options.forEach((opt) => {
+      const btn = document.createElement("button");
+      btn.className = "dopt";
+      btn.innerHTML = `<span class="dopt-key">${opt.key}</span><span>${opt.text}</span>`;
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        if (decisionPassed[sceneIndex]) return;
+
+        const isRight = opt.key === scene.correct;
+        opts.querySelectorAll(".dopt").forEach((b) => b.classList.remove("wrong"));
+
+        if (isRight) {
+          btn.classList.add("right");
+          opts.querySelectorAll(".dopt").forEach((b) => (b.disabled = true));
+          fb.className = "dpanel-fb ok";
+          fb.textContent = "✓ " + scene.correctFeedback;
+          decisionPassed[sceneIndex] = true;
+          updateNav();
+        } else {
+          btn.classList.add("wrong");
+          fb.className = "dpanel-fb no";
+          fb.textContent = scene.incorrectFeedback;
+        }
+      };
+      opts.appendChild(btn);
+    });
+
+    dsceneEl.appendChild(panel);
+
+    dsceneProgress.textContent = decisionPassed[sceneIndex]
+      ? "Decision complete"
+      : "Decision required";
+    dsceneHint.style.display = "none";
+  }
+
   function buildLineDots() {
     const scene = csScenes[sceneIndex];
     dsceneDots.innerHTML = "";
+    if (scene.type === "decision") return;
     scene.lines.forEach((_, i) => {
       const dot = document.createElement("div");
       dot.className = "slide-dot" + (i <= lineIndex ? " active" : "");
@@ -471,15 +584,36 @@ if (csShowEl) {
     csDots.innerHTML = "";
     csScenes.forEach((_, i) => {
       const dot = document.createElement("button");
-      dot.className = "slide-dot" + (i === sceneIndex ? " active" : "");
+      const locked = isGatedBefore(i);
+      dot.className =
+        "slide-dot" + (i === sceneIndex ? " active" : "") + (locked ? " locked" : "");
       dot.setAttribute("aria-label", `Go to scene ${i + 1}`);
       dot.onclick = (e) => {
         e.stopPropagation();
+        if (isGatedBefore(i)) return;
         sceneIndex = i;
         renderScene();
       };
       csDots.appendChild(dot);
     });
+  }
+
+  function updateNav() {
+    const scene = csScenes[sceneIndex];
+    const blocked = scene.type === "decision" && !decisionPassed[sceneIndex];
+    csNext.disabled = blocked;
+    csNext.textContent = blocked
+      ? "Answer to continue"
+      : sceneIndex === csScenes.length - 1
+      ? "Restart ↺"
+      : "Next →";
+    csPrev.disabled = sceneIndex === 0;
+    buildSceneDots();
+    if (scene.type === "decision") {
+      dsceneProgress.textContent = decisionPassed[sceneIndex]
+        ? "Decision complete"
+        : "Decision required";
+    }
   }
 
   function showLine(i) {
@@ -521,6 +655,9 @@ if (csShowEl) {
       bubble.remove();
       bubble = null;
     }
+    dsceneEl.querySelectorAll(".dpanel").forEach((p) => p.remove());
+    dsceneEl.classList.remove("decision-mode");
+    dsceneHint.style.display = "";
     dsceneProgress.textContent = "Tap to begin";
     dsceneHint.textContent = "Tap the scene to continue →";
     buildLineDots();
@@ -528,21 +665,40 @@ if (csShowEl) {
 
   function renderScene() {
     const scene = csScenes[sceneIndex];
+    stopAudio();
+    lineIndex = -1;
+    if (bubble) {
+      bubble.remove();
+      bubble = null;
+    }
+    dsceneEl.querySelectorAll(".dpanel").forEach((p) => p.remove());
+    dsceneEl.classList.remove("decision-mode");
+    dsceneHint.style.display = "";
+    dsceneHint.textContent = "Tap the scene to continue →";
+
     dsceneImg.src = scene.img;
     dsceneImg.alt = scene.alt;
     csSlideProgress.textContent = `Scene ${sceneIndex + 1} of ${csScenes.length}`;
     csSlideTitle.textContent = scene.title;
     csSlideEmotion.textContent = scene.emotion;
     csSlideContext.textContent = scene.context;
-    csPrev.disabled = sceneIndex === 0;
-    csNext.textContent =
-      sceneIndex === csScenes.length - 1 ? "Restart ↺" : "Next →";
-    buildSceneDots();
-    resetScene();
+
+    dsceneReplay.style.display = scene.type === "decision" ? "none" : "";
+
+    if (scene.type === "decision") {
+      buildDecision(scene);
+      dsceneDots.innerHTML = "";
+    } else {
+      dsceneProgress.textContent = "Tap to begin";
+      buildLineDots();
+    }
+
+    updateNav();
   }
 
   dsceneEl.addEventListener("click", () => {
     const scene = csScenes[sceneIndex];
+    if (scene.type === "decision") return;
     if (lineIndex >= scene.lines.length - 1) return;
     lineIndex++;
     showLine(lineIndex);
@@ -561,6 +717,8 @@ if (csShowEl) {
   });
 
   csNext.addEventListener("click", () => {
+    const scene = csScenes[sceneIndex];
+    if (scene.type === "decision" && !decisionPassed[sceneIndex]) return;
     sceneIndex = sceneIndex === csScenes.length - 1 ? 0 : sceneIndex + 1;
     renderScene();
   });

@@ -459,9 +459,9 @@ const csScenes = [
     context: "The core discipline of the role: a health score is a leading indicator. Ravi acts on good news, not just bad news — which is precisely what separates Customer Success from support.",
     takeaway: "A health score is a leading indicator. Act on it while things are still going well.",
     lines: [
-      { speaker: "Ravi", side: "right", audio: "audio/cs-7-1.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, text: "Health score's at 91. Usage is steady, no open tickets, and she's adopted four of the five core features." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-7-2.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, text: "Nothing's wrong. Which is exactly when most teams do nothing at all." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-7-3.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, text: "I'll set up a check-in anyway — I'd rather hear how it's going while it's going well." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-1.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, text: "Health score's at 91. Usage is steady, no open tickets, and she's adopted four of the five core features." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-2.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, text: "Nothing's wrong. Which is exactly when most teams do nothing at all." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-3.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, text: "I'll set up a check-in anyway — I'd rather hear how it's going while it's going well." },
     ],
   },
   {
@@ -486,8 +486,8 @@ const csScenes = [
     context: "Months later, the signal Ravi set himself up to catch actually fires. He notices the decline before Anya says a word — which is the entire point of watching the score.",
     takeaway: "The value of monitoring is catching the drop before the customer reports it — because often, they never will.",
     lines: [
-      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-1.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, text: "Her usage has been sliding for two months. Steady drop, week after week." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-2.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, text: "And not a single support ticket. No complaint, no email. Nothing." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-1.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, text: "Her usage has been sliding for two months. Steady drop, week after week." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-2.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, text: "And not a single support ticket. No complaint, no email. Nothing." },
     ],
   },
   {

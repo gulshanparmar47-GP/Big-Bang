@@ -1094,6 +1094,101 @@ h1, h2, h3 {
 .dpanel-fb.no { background: rgba(224,90,46,0.18); color: #ffdccf; border: 1px solid rgba(224,90,46,0.45); }
 .slide-dot.locked { opacity: 0.3; cursor: not-allowed; }
 
+/* takeaway strip — learner-facing lesson, visible in both modes */
+.cs-takeaway {
+  margin-top: 16px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  background: linear-gradient(90deg, rgba(240,165,46,0.14), rgba(124,92,255,0.10));
+  border-left: 3px solid var(--sunfire);
+  border-radius: 6px;
+  padding: 13px 16px;
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.cs-takeaway.visible { opacity: 1; transform: translateY(0); }
+.cs-takeaway-label {
+  flex: 0 0 auto;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sunfire-dim);
+  font-weight: 600;
+}
+/* in immersive mode, slide-info is hidden — but the takeaway must still show,
+   so we surface it as an overlay pinned above the control bar */
+.slideshow.fullscreen-mode .slide-info {
+  display: block;
+  background: transparent;
+  padding: 0;
+  position: absolute;
+  left: 0; right: 0; bottom: 64px;
+  pointer-events: none;
+}
+.slideshow.fullscreen-mode .slide-info > *:not(.cs-takeaway) { display: none; }
+.slideshow.fullscreen-mode .cs-takeaway {
+  margin: 0 16px;
+  background: rgba(12,14,28,0.82);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+
+/* timeline scene (hand-coded) */
+.dscene.timeline-mode { cursor: default; background: var(--space-deep); }
+.dscene.timeline-mode img { display: none; }
+.dtimeline {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 30px 44px;
+  box-sizing: border-box;
+  background:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.4) 50%, transparent 50%),
+    radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.3) 50%, transparent 50%),
+    radial-gradient(1px 1px at 85% 60%, rgba(255,255,255,0.25) 50%, transparent 50%),
+    var(--space-deep);
+}
+.dtl-title {
+  font-family: var(--display);
+  font-size: clamp(15px, 2.4vw, 20px);
+  color: #fff;
+  text-align: center;
+  margin-bottom: 26px;
+}
+.dtl-chart { position: relative; width: 100%; height: 56%; }
+.dtl-svg { width: 100%; height: 100%; overflow: visible; }
+.dtl-line {
+  fill: none;
+  stroke: url(#dtlgrad);
+  stroke: var(--sunfire);
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 4px rgba(240,165,46,0.5));
+}
+.dtl-dot { fill: #fff; stroke: var(--sunfire); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.dtl-labels { position: relative; height: 24px; margin-top: 8px; }
+.dtl-label {
+  position: absolute;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: clamp(8px, 1.5vw, 11px);
+  color: rgba(255,255,255,0.8);
+  white-space: nowrap;
+  top: 6px;
+}
+
 @media (max-width: 640px) {
   .dpanel { padding: 14px 16px; gap: 7px; }
   .dpanel-q { font-size: 16px; }

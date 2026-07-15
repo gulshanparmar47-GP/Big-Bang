@@ -386,9 +386,9 @@ const csScenes = [
     context: "Meera talks Anya out of buying more than she needs. That single choice demonstrates the Customer Success principle better than any definition could — she optimises for Anya's outcome, not the invoice.",
     takeaway: "Advising a customer to buy less isn't lost revenue. It's earned trust.",
     lines: [
-      { speaker: "Anya", side: "left", audio: "audio/cs-3-1.mp3", text: "So based on what I'm doing, would this set of tools actually be a good starting point?" },
-      { speaker: "Meera", side: "right", audio: "audio/cs-3-2.mp3", text: "For where you are right now — yes. You've just started creating content. Start with these three, and add the rest when you actually need them." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-3-3.mp3", text: "That's the first honest answer I've gotten all week. Thank you, Meera." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-3-1.mp3", pos: { left: "3%", top: "4%" }, text: "So based on what I'm doing, would this set of tools actually be a good starting point?" },
+      { speaker: "Meera", side: "right", audio: "audio/cs-3-2.mp3", pos: { right: "3%", top: "4%" }, text: "For where you are right now — yes. You've just started creating content. Start with these three, and add the rest when you actually need them." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-3-3.mp3", pos: { left: "3%", top: "4%" }, text: "That's the first honest answer I've gotten all week. Thank you, Meera." },
     ],
   },
   {
@@ -447,8 +447,8 @@ const csScenes = [
     context: "Ravi's first appearance is the moment he ends Anya's crisis. Note what he does not promise — not to fix everything, but to own this, by name. That distinction is the whole role.",
     takeaway: "Ownership isn't promising to fix everything. It's being the one named person who stays with the problem.",
     lines: [
-      { speaker: "Ravi", side: "right", audio: "audio/cs-7a-1.mp3", pos: { right: "3%", top: "4%" }, text: "I've got your login sorted. Meera set you up well — I'm taking it from here, and I'm staying on this account personally." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-7a-2.mp3", pos: { left: "3%", top: "4%" }, text: "One person, not a queue? That's the first time anyone's said that. Thank you, Ravi." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7a-1.mp3", pos: { right: "3%", top: "4%" }, pos: { right: "2%", top: "3%" }, text: "I've got your login sorted. Meera set you up well — I'm taking it from here, and I'm staying on this account personally." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-7a-2.mp3", pos: { left: "3%", top: "4%" }, pos: { left: "2%", top: "3%" }, text: "One person, not a queue? That's the first time anyone's said that. Thank you, Ravi." },
     ],
   },
   {
@@ -459,9 +459,9 @@ const csScenes = [
     context: "The core discipline of the role: a health score is a leading indicator. Ravi acts on good news, not just bad news — which is precisely what separates Customer Success from support.",
     takeaway: "A health score is a leading indicator. Act on it while things are still going well.",
     lines: [
-      { speaker: "Ravi", side: "right", audio: "audio/cs-7-1.mp3", pos: { left: "5%", top: "6%" }, text: "Health score's at 91. Usage is steady, no open tickets, and she's adopted four of the five core features." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-7-2.mp3", pos: { left: "5%", top: "6%" }, text: "Nothing's wrong. Which is exactly when most teams do nothing at all." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-7-3.mp3", pos: { left: "5%", top: "6%" }, text: "I'll set up a check-in anyway — I'd rather hear how it's going while it's going well." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-1.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, text: "Health score's at 91. Usage is steady, no open tickets, and she's adopted four of the five core features." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-2.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, text: "Nothing's wrong. Which is exactly when most teams do nothing at all." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-3.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, text: "I'll set up a check-in anyway — I'd rather hear how it's going while it's going well." },
     ],
   },
   {
@@ -472,10 +472,10 @@ const csScenes = [
     context: "A Quarterly Business Review done properly is a goals review, not a disguised upsell. Ravi solves her problem with a feature she already pays for — and Anya notices.",
     takeaway: "A QBR reviews the customer's goals — not the vendor's pipeline.",
     lines: [
-      { speaker: "Ravi", side: "right", audio: "audio/cs-8-1.mp3", pos: { right: "3%", top: "4%" }, text: "Last quarter you said your goal was to publish twice a week. Where did that actually land?" },
-      { speaker: "Anya", side: "left", audio: "audio/cs-8-2.mp3", pos: { left: "3%", top: "4%" }, text: "Closer to once, honestly. It's the editing — every video takes me hours longer than I plan for." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-8-3.mp3", pos: { right: "3%", top: "4%" }, text: "Then that's what we fix. You're redoing the same edits by hand every time. There's a preset library in your plan — set it once, reuse it on every video after. It's already included in what you pay for." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-8-4.mp3", pos: { left: "3%", top: "4%" }, text: "You're… not trying to sell me anything right now, are you?" },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-8-1.mp3", pos: { right: "3%", top: "4%" }, pos: { right: "2%", top: "3%" }, text: "Last quarter you said your goal was to publish twice a week. Where did that actually land?" },
+      { speaker: "Anya", side: "left", audio: "audio/cs-8-2.mp3", pos: { left: "3%", top: "4%" }, pos: { left: "2%", top: "3%" }, text: "Closer to once, honestly. It's the editing — every video takes me hours longer than I plan for." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-8-3.mp3", pos: { right: "3%", top: "4%" }, pos: { right: "2%", top: "3%" }, text: "Then that's what we fix. You're redoing the same edits by hand every time. There's a preset library in your plan — set it once, reuse it on every video after. It's already included in what you pay for." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-8-4.mp3", pos: { left: "3%", top: "4%" }, pos: { left: "2%", top: "3%" }, text: "You're… not trying to sell me anything right now, are you?" },
     ],
   },
   {
@@ -486,8 +486,8 @@ const csScenes = [
     context: "Months later, the signal Ravi set himself up to catch actually fires. He notices the decline before Anya says a word — which is the entire point of watching the score.",
     takeaway: "The value of monitoring is catching the drop before the customer reports it — because often, they never will.",
     lines: [
-      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-1.mp3", pos: { left: "5%", top: "6%" }, text: "Her usage has been sliding for two months. Steady drop, week after week." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-2.mp3", pos: { left: "5%", top: "6%" }, text: "And not a single support ticket. No complaint, no email. Nothing." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-1.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, text: "Her usage has been sliding for two months. Steady drop, week after week." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-2.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, text: "And not a single support ticket. No complaint, no email. Nothing." },
     ],
   },
   {
@@ -522,10 +522,10 @@ const csScenes = [
     context: "Ravi reaches out before Anya asks. The cause isn't a broken product — her team grew and the new members were never onboarded. A real churn risk, fixed by a real intervention.",
     takeaway: "When usage drops, the fix is usually adoption, not the product. Find out what changed on the customer's side.",
     lines: [
-      { speaker: "Ravi", side: "right", audio: "audio/cs-9b-1.mp3", pos: { right: "3%", top: "4%" }, text: "I noticed things went quiet, so I wanted to check in before assuming anything. What changed on your end?" },
-      { speaker: "Anya", side: "left", audio: "audio/cs-9b-2.mp3", pos: { left: "3%", top: "4%" }, text: "We added three people to the team. Honestly, none of them knew how to use half the features, so they just… stopped." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-9b-3.mp3", pos: { right: "3%", top: "4%" }, text: "That's on us to fix, not you. Let me run an onboarding session for your new folks this week." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-9b-4.mp3", pos: { left: "3%", top: "4%" }, text: "You caught that before I even thought to ask. That's exactly why we're staying." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9b-1.mp3", pos: { right: "3%", top: "4%" }, pos: { right: "2%", top: "3%" }, text: "I noticed things went quiet, so I wanted to check in before assuming anything. What changed on your end?" },
+      { speaker: "Anya", side: "left", audio: "audio/cs-9b-2.mp3", pos: { left: "3%", top: "4%" }, pos: { left: "2%", top: "3%" }, text: "We added three people to the team. Honestly, none of them knew how to use half the features, so they just… stopped." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9b-3.mp3", pos: { right: "3%", top: "4%" }, pos: { right: "2%", top: "3%" }, text: "That's on us to fix, not you. Let me run an onboarding session for your new folks this week." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-9b-4.mp3", pos: { left: "3%", top: "4%" }, pos: { left: "2%", top: "3%" }, text: "You caught that before I even thought to ask. That's exactly why we're staying." },
     ],
   },
   {

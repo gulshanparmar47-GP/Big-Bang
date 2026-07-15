@@ -1123,41 +1123,36 @@ h1, h2, h3 {
 /* takeaway strip — learner-facing lesson, visible in both modes */
 .cs-takeaway {
   margin-top: 18px;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  display: block;
   background: linear-gradient(135deg, rgba(240,165,46,0.20), rgba(124,92,255,0.16));
   border: 1px solid rgba(240,165,46,0.35);
   border-left: 4px solid var(--sunfire);
   border-radius: 8px;
-  padding: 16px 18px;
+  padding: 14px 18px;
   font-family: var(--body);
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 500;
   line-height: 1.5;
   color: var(--ink);
+  text-align: left;
   box-shadow: 0 6px 20px rgba(240,165,46,0.12);
   opacity: 0;
-  transform: translateY(10px) scale(0.99);
+  transform: translateY(10px);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
-.cs-takeaway.visible { opacity: 1; transform: translateY(0) scale(1); }
+.cs-takeaway.visible { opacity: 1; transform: translateY(0); }
 .cs-takeaway-label {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+  display: inline-block;
   font-family: var(--mono);
   font-size: 10.5px;
   text-transform: uppercase;
   letter-spacing: 0.09em;
   color: var(--paper);
   background: var(--sunfire-dim);
-  padding: 4px 9px;
+  padding: 3px 9px;
   border-radius: 5px;
   font-weight: 600;
-  position: relative;
-  top: 1px;
+  margin-right: 10px;
 }
 /* in immersive mode, slide-info is hidden — but the takeaway must still show,
    so we surface it as an overlay pinned above the control bar */
@@ -1172,9 +1167,11 @@ h1, h2, h3 {
 .slideshow.fullscreen-mode .slide-info > *:not(.cs-takeaway) { display: none; }
 .slideshow.fullscreen-mode .cs-takeaway {
   margin: 0 16px;
-  background: rgba(12,14,28,0.82);
+  background: rgba(12,14,28,0.85);
   color: #fff;
   backdrop-filter: blur(6px);
+  text-align: left;
+  border-left: 4px solid var(--sunfire);
 }
 /* on the timeline scene, the chart owns the full frame — don't overlay the takeaway
    on top of the milestone labels; the timeline's own summary line carries the message */

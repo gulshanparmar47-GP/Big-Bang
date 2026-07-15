@@ -1178,15 +1178,26 @@ h1, h2, h3 {
   filter: drop-shadow(0 0 4px rgba(240,165,46,0.5));
 }
 .dtl-dot { fill: #fff; stroke: var(--sunfire); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.dtl-labels { position: relative; height: 24px; margin-top: 8px; }
+.dtl-labels { position: relative; height: 24px; margin-top: 10px; }
 .dtl-label {
   position: absolute;
   transform: translateX(-50%);
-  font-family: var(--mono);
-  font-size: clamp(8px, 1.5vw, 11px);
-  color: rgba(255,255,255,0.8);
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(11px, 2vw, 16px);
+  color: #fff;
   white-space: nowrap;
-  top: 6px;
+  top: 4px;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+.dtl-hint {
+  margin-top: 22px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--sunfire);
+  letter-spacing: 0.02em;
 }
 
 @media (max-width: 640px) {

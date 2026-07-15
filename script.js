@@ -37,8 +37,8 @@ const slides = [
     narration: "About 4.54 billion years ago, dust and rock orbiting the young Sun gradually came together to form Earth. What began as a hot, hostile world would eventually become our home.",
   },
   {
-    type: "localvideo", title: "Moon", emotion: "Fascination",
-    src: "video/moon.mp4",
+    type: "video", title: "Moon", emotion: "Fascination",
+    src: "https://www.youtube.com/embed/QK_g9Rm7tEs",
     onscreen: "Earth's Closest Companion: The Moon",
     narration: "Scientists believe the Moon formed after a giant collision between the early Earth and a Mars-sized object. The Moon helped stabilize Earth's tilt, creating the conditions that allowed life to flourish.",
   },
@@ -439,6 +439,18 @@ const csScenes = [
     },
   },
   {
+    title: "Trust Restored",
+    emotion: "Relief",
+    img: "images/cs-slide8.jpg",
+    alt: "Split screen: Anya on a video call and Ravi in his office, both engaged, as he reassures her",
+    context: "Ravi's first appearance is the moment he ends Anya's crisis. Note what he does not promise — not to fix everything, but to own this, by name. That distinction is the whole role.",
+    takeaway: "Ownership isn't promising to fix everything. It's being the one named person who stays with the problem.",
+    lines: [
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7a-1.mp3", text: "I've got your login sorted. Meera set you up well — I'm taking it from here, and I'm staying on this account personally." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-7a-2.mp3", text: "One person, not a queue? That's the first time anyone's said that. Thank you, Ravi." },
+    ],
+  },
+  {
     title: "Reading the Health Score",
     emotion: "Confidence",
     img: "images/cs-slide7.jpg",
@@ -466,6 +478,18 @@ const csScenes = [
     ],
   },
   {
+    title: "Something's Changed",
+    emotion: "Concern",
+    img: "images/cs-slide9.jpg",
+    alt: "Ravi looking closely at a dashboard where the usage graph has begun dropping and the health score is falling",
+    context: "Months later, the signal Ravi set himself up to catch actually fires. He notices the decline before Anya says a word — which is the entire point of watching the score.",
+    takeaway: "The value of monitoring is catching the drop before the customer reports it — because often, they never will.",
+    lines: [
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-1.mp3", text: "Her usage has been sliding for two months. Steady drop, week after week." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-2.mp3", text: "And not a single support ticket. No complaint, no email. Nothing." },
+    ],
+  },
+  {
     type: "decision",
     title: "Decision Point: The Silent Decline",
     emotion: "Alertness",
@@ -490,28 +514,29 @@ const csScenes = [
     },
   },
   {
+    title: "Ravi Reconnects",
+    emotion: "Resolution",
+    img: "images/cs-slide8.jpg",
+    alt: "Split screen: Ravi on a call with Anya, who explains what changed on her side",
+    context: "Ravi reaches out before Anya asks. The cause isn't a broken product — her team grew and the new members were never onboarded. A real churn risk, fixed by a real intervention.",
+    takeaway: "When usage drops, the fix is usually adoption, not the product. Find out what changed on the customer's side.",
+    lines: [
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9b-1.mp3", text: "I noticed things went quiet, so I wanted to check in before assuming anything. What changed on your end?" },
+      { speaker: "Anya", side: "left", audio: "audio/cs-9b-2.mp3", text: "We added three people to the team. Honestly, none of them knew how to use half the features, so they just… stopped." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9b-3.mp3", text: "That's on us to fix, not you. Let me run an onboarding session for your new folks this week." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-9b-4.mp3", text: "You caught that before I even thought to ask. That's exactly why we're staying." },
+    ],
+  },
+  {
     title: "The Customer Succeeds",
     emotion: "Pride",
     img: "images/cs-slide10.jpg",
     alt: "Anya presenting her finished creative work confidently on a large screen to three engaged, smiling colleagues in a bright meeting room",
-    context: "The outcome Customer Success exists to produce. Not a renewal, not a happy survey — a customer who achieved the thing they came to do.",
-    takeaway: "The real measure of Customer Success is not retention. It's whether the customer actually achieved their goal.",
+    context: "The outcome Customer Success exists to produce. Not a renewal, not a happy survey — a customer who achieved the thing they came to do, and renewed because of it.",
+    takeaway: "The real measure of Customer Success is whether the customer achieved their goal. The renewal follows from that — not the other way around.",
     lines: [
       { speaker: "Anya", side: "left", audio: "audio/cs-10-1.mp3", text: "This is the campaign — start to finish, and we shipped it two weeks early." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-10-2.mp3", text: "A year ago, I couldn't even log in. Now look at this." },
-    ],
-  },
-  {
-    title: "Renewal",
-    emotion: "Trust",
-    img: "images/cs-slide8.jpg",
-    alt: "Split screen: Anya at her desk and Ravi in his office, both relaxed and smiling on a video call",
-    context: "Retention as an outcome, not a transaction. The renewal was earned across the whole journey — long before the renewal date arrived.",
-    takeaway: "You don't sell the renewal at renewal time. You earn it in every interaction before it.",
-    lines: [
-      { speaker: "Ravi", side: "right", audio: "audio/cs-11-1.mp3", text: "It's renewal season. I'm not going to pitch you — let's just look at what you actually got out of the year." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-11-2.mp3", text: "Honestly, the thing that kept me wasn't the product. It's that someone noticed when I went quiet." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-11-3.mp3", text: "That's the job. Same goals conversation next quarter?" },
+      { speaker: "Anya", side: "left", audio: "audio/cs-10-2.mp3", text: "A year ago, I couldn't even log in. This year, I renewed without even thinking about it." },
     ],
   },
   {
@@ -743,48 +768,60 @@ if (csShowEl) {
   }
 
   // ----- Timeline scene (hand-coded, no image) -----
+  const TIMELINE_MILESTONES = [
+    { label: "Research", score: 20 },
+    { label: "Purchase", score: 78 },
+    { label: "Breakdown", score: 22 },
+    { label: "Ownership", score: 58 },
+    { label: "Health Check", score: 90 },
+    { label: "Renewal", score: 96 },
+  ];
+  let timelineRevealed = 0;
+
   function buildTimeline() {
     dsceneEl.classList.add("timeline-mode");
-    const milestones = [
-      { label: "Research", score: 0 },
-      { label: "Purchase", score: 78 },
-      { label: "Breakdown", score: 30 },
-      { label: "Ownership", score: 55 },
-      { label: "Health Check", score: 88 },
-      { label: "Renewal", score: 94 },
-    ];
+    timelineRevealed = 1;
     const wrap = document.createElement("div");
     wrap.className = "dtimeline";
-    const pts = milestones
-      .map((m, i) => {
-        const x = (i / (milestones.length - 1)) * 100;
-        const y = 100 - m.score;
-        return `${x},${y}`;
-      })
-      .join(" ");
-    const dots = milestones
-      .map((m, i) => {
-        const x = (i / (milestones.length - 1)) * 100;
-        const y = 100 - m.score;
-        return `<circle cx="${x}" cy="${y}" r="2.4" class="dtl-dot"/>`;
-      })
-      .join("");
-    const labels = milestones
-      .map((m, i) => {
-        const x = (i / (milestones.length - 1)) * 100;
-        return `<div class="dtl-label" style="left:${x}%">${m.label}</div>`;
-      })
-      .join("");
     wrap.innerHTML = `
       <div class="dtl-title">The customer's health score across the journey</div>
       <div class="dtl-chart">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="dtl-svg">
-          <polyline points="${pts}" class="dtl-line"/>
-          ${dots}
+          <polyline points="" class="dtl-line"/>
+          <g class="dtl-dots"></g>
         </svg>
-        <div class="dtl-labels">${labels}</div>
-      </div>`;
+        <div class="dtl-labels"></div>
+      </div>
+      <div class="dtl-hint">Tap to reveal each stage →</div>`;
     dsceneEl.appendChild(wrap);
+    renderTimeline();
+  }
+
+  function renderTimeline() {
+    const wrap = dsceneEl.querySelector(".dtimeline");
+    if (!wrap) return;
+    const shown = TIMELINE_MILESTONES.slice(0, timelineRevealed);
+    const n = TIMELINE_MILESTONES.length;
+
+    const pts = shown
+      .map((m, i) => `${(i / (n - 1)) * 100},${100 - m.score}`)
+      .join(" ");
+    wrap.querySelector(".dtl-line").setAttribute("points", pts);
+
+    wrap.querySelector(".dtl-dots").innerHTML = shown
+      .map((m, i) => `<circle cx="${(i / (n - 1)) * 100}" cy="${100 - m.score}" r="2.6" class="dtl-dot"/>`)
+      .join("");
+
+    wrap.querySelector(".dtl-labels").innerHTML = shown
+      .map((m, i) => `<div class="dtl-label" style="left:${(i / (n - 1)) * 100}%">${m.label}</div>`)
+      .join("");
+
+    const hint = wrap.querySelector(".dtl-hint");
+    if (timelineRevealed >= n) {
+      hint.textContent = "The full journey — dip at the breakdown, recovery through everything after.";
+    } else {
+      hint.textContent = "Tap to reveal each stage →";
+    }
   }
 
   function resetScene() {
@@ -850,6 +887,13 @@ if (csShowEl) {
   dsceneEl.addEventListener("click", () => {
     const scene = csScenes[sceneIndex];
     if (scene.type === "decision") return;
+    if (scene.type === "timeline") {
+      if (timelineRevealed < TIMELINE_MILESTONES.length) {
+        timelineRevealed++;
+        renderTimeline();
+      }
+      return;
+    }
     if (lineIndex >= scene.lines.length - 1) return;
     lineIndex++;
     showLine(lineIndex);

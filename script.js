@@ -360,10 +360,10 @@ const csScenes = [
     context: "Two colleagues debate brand loyalty over coffee — and arrive at the definition of Customer Success themselves.",
     takeaway: "Customer Success is not support. It's the discipline of making sure customers reach their goals.",
     lines: [
-      { speaker: "Anya", side: "left", audio: "audio/cs-1-1.mp3", text: "Okay, be honest — which brand would you actually defend in an argument?" },
-      { speaker: "Dev", side: "right", audio: "audio/cs-1-2.mp3", text: "There's one, yeah. Not because its tools are unique — plenty of brands have the same features. But it actually got me somewhere." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-1-3.mp3", text: "Huh — so it's not really about support or service then?" },
-      { speaker: "Dev", side: "right", audio: "audio/cs-1-4.mp3", text: "Exactly. It's the discipline of making sure customers actually reach their goals. That's Customer Success." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-1-1.mp3", pos: { left: "14%", top: "6%" }, text: "Okay, be honest — which brand would you actually defend in an argument?" },
+      { speaker: "Dev", side: "right", audio: "audio/cs-1-2.mp3", pos: { right: "14%", top: "6%" }, text: "There's one, yeah. Not because its tools are unique — plenty of brands have the same features. But it actually got me somewhere." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-1-3.mp3", pos: { left: "14%", top: "6%" }, text: "Huh — so it's not really about support or service then?" },
+      { speaker: "Dev", side: "right", audio: "audio/cs-1-4.mp3", pos: { right: "14%", top: "6%" }, text: "Exactly. It's the discipline of making sure customers actually reach their goals. That's Customer Success." },
     ],
   },
   {
@@ -386,9 +386,9 @@ const csScenes = [
     context: "Meera talks Anya out of buying more than she needs. That single choice demonstrates the Customer Success principle better than any definition could — she optimises for Anya's outcome, not the invoice.",
     takeaway: "Advising a customer to buy less isn't lost revenue. It's earned trust.",
     lines: [
-      { speaker: "Anya", side: "left", audio: "audio/cs-3-1.mp3", pos: { left: "3%", top: "4%" }, text: "So based on what I'm doing, would this set of tools actually be a good starting point?" },
+      { speaker: "Anya", side: "left", audio: "audio/cs-3-1.mp3", pos: { left: "3%", top: "4%" }, pos: { left: "6%", top: "8%" }, text: "So based on what I'm doing, would this set of tools actually be a good starting point?" },
       { speaker: "Meera", side: "right", audio: "audio/cs-3-2.mp3", pos: { right: "3%", top: "4%" }, text: "For where you are right now — yes. You've just started creating content. Start with these three, and add the rest when you actually need them." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-3-3.mp3", pos: { left: "3%", top: "4%" }, text: "That's the first honest answer I've gotten all week. Thank you, Meera." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-3-3.mp3", pos: { left: "3%", top: "4%" }, pos: { left: "6%", top: "8%" }, text: "That's the first honest answer I've gotten all week. Thank you, Meera." },
     ],
   },
   {
@@ -459,9 +459,9 @@ const csScenes = [
     context: "The core discipline of the role: a health score is a leading indicator. Ravi acts on good news, not just bad news — which is precisely what separates Customer Success from support.",
     takeaway: "A health score is a leading indicator. Act on it while things are still going well.",
     lines: [
-      { speaker: "Ravi", side: "right", audio: "audio/cs-7-1.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, text: "Health score's at 91. Usage is steady, no open tickets, and she's adopted four of the five core features." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-7-2.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, text: "Nothing's wrong. Which is exactly when most teams do nothing at all." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-7-3.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, text: "I'll set up a check-in anyway — I'd rather hear how it's going while it's going well." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-1.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, pos: { right: "6%", top: "12%" }, text: "Health score's at 91. Usage is steady, no open tickets, and she's adopted four of the five core features." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-2.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, pos: { right: "6%", top: "12%" }, text: "Nothing's wrong. Which is exactly when most teams do nothing at all." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-7-3.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, pos: { right: "6%", top: "12%" }, text: "I'll set up a check-in anyway — I'd rather hear how it's going while it's going well." },
     ],
   },
   {
@@ -486,8 +486,8 @@ const csScenes = [
     context: "Months later, the signal Ravi set himself up to catch actually fires. He notices the decline before Anya says a word — which is the entire point of watching the score.",
     takeaway: "The value of monitoring is catching the drop before the customer reports it — because often, they never will.",
     lines: [
-      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-1.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, text: "Her usage has been sliding for two months. Steady drop, week after week." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-2.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, text: "And not a single support ticket. No complaint, no email. Nothing." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-1.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, pos: { right: "6%", top: "12%" }, text: "Her usage has been sliding for two months. Steady drop, week after week." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-9a-2.mp3", pos: { left: "5%", top: "6%" }, pos: { left: "8%", top: "5%" }, pos: { left: "30%", top: "30%" }, pos: { right: "6%", top: "12%" }, text: "And not a single support ticket. No complaint, no email. Nothing." },
     ],
   },
   {
@@ -817,7 +817,14 @@ if (csShowEl) {
       .join("");
 
     wrap.querySelector(".dtl-labels").innerHTML = shown
-      .map((m, i) => `<div class="dtl-label" style="left:${(i / (n - 1)) * 100}%">${m.label}</div>`)
+      .map((m, i) => {
+        const x = (i / (n - 1)) * 100;
+        const y = 100 - m.score;
+        const align = i === 0 ? "left:0;transform:none;text-align:left"
+          : i === n - 1 ? "right:0;left:auto;transform:none;text-align:right"
+          : `left:${x}%;transform:translateX(-50%)`;
+        return `<div class="dtl-label" style="top:calc(${y}% + 14px);${align}">${m.label}</div>`;
+      })
       .join("");
 
     const hint = wrap.querySelector(".dtl-hint");

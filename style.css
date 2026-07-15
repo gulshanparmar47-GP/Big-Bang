@@ -1222,18 +1222,16 @@ h1, h2, h3 {
   filter: drop-shadow(0 0 4px rgba(240,165,46,0.5));
 }
 .dtl-dot { fill: #fff; stroke: var(--sunfire); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.dtl-labels { position: relative; height: 24px; margin-top: 10px; }
+.dtl-labels { position: absolute; inset: 0; pointer-events: none; }
 .dtl-label {
   position: absolute;
-  transform: translateX(-50%);
   font-family: var(--display);
   font-weight: 600;
-  font-size: clamp(11px, 2vw, 16px);
+  font-size: clamp(11px, 1.9vw, 15px);
   color: #fff;
   white-space: nowrap;
-  top: 4px;
   letter-spacing: 0.01em;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.7);
 }
 .dtl-hint {
   margin-top: 22px;

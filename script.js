@@ -849,6 +849,7 @@ if (csShowEl) {
     }
     dsceneEl.querySelectorAll(".dpanel, .dtimeline").forEach((p) => p.remove());
     dsceneEl.classList.remove("decision-mode", "timeline-mode");
+    csShowEl.classList.toggle("hide-takeaway", scene.type === "timeline");
     dsceneHint.style.display = "";
     dsceneHint.textContent = "Tap the scene to continue →";
     hideTakeaway();

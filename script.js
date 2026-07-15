@@ -37,8 +37,8 @@ const slides = [
     narration: "About 4.54 billion years ago, dust and rock orbiting the young Sun gradually came together to form Earth. What began as a hot, hostile world would eventually become our home.",
   },
   {
-    type: "image", title: "Moon", emotion: "Fascination",
-    src: "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/lunar-science/internal_resources/585/Moon_formation_illustration.jpeg?w=1200",
+    type: "localvideo", title: "Moon", emotion: "Fascination",
+    src: "video/moon.mp4",
     onscreen: "Earth's Closest Companion: The Moon",
     narration: "Scientists believe the Moon formed after a giant collision between the early Earth and a Mars-sized object. The Moon helped stabilize Earth's tilt, creating the conditions that allowed life to flourish.",
   },
@@ -210,6 +210,8 @@ function renderSlide() {
   if (s.type === "video") {
     const embedUrl = `${s.src}?fs=0&cc_load_policy=1&rel=0&modestbranding=1`;
     slideFrame.innerHTML = `<iframe src="${embedUrl}" allow="autoplay; encrypted-media" loading="lazy"></iframe><div class="slide-stat">${s.onscreen}</div>`;
+  } else if (s.type === "localvideo") {
+    slideFrame.innerHTML = `<video src="${s.src}" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;background:#000;"></video><div class="slide-stat">${s.onscreen}</div>`;
   } else if (s.type === "image") {
     slideFrame.innerHTML = `<img src="${s.src}" alt="${s.title}" loading="lazy"><div class="slide-stat">${s.onscreen}</div>`;
   } else if (s.type === "statement") {
@@ -355,9 +357,10 @@ const csScenes = [
     img: "images/cs-slide1.jpg",
     alt: "Two colleagues chatting over coffee in a corporate cafeteria",
     context: "Two colleagues debate brand loyalty over coffee — and arrive at the definition of Customer Success themselves.",
+    takeaway: "Customer Success is not support. It's the discipline of making sure customers reach their goals.",
     lines: [
       { speaker: "Anya", side: "left", audio: "audio/cs-1-1.mp3", text: "Okay, be honest — which brand would you actually defend in an argument?" },
-      { speaker: "Dev", side: "right", audio: "audio/cs-1-2.mp3", text: "Probably Adobe. Not because the tools are unique, but because it's actually gotten me where I was trying to go." },
+      { speaker: "Dev", side: "right", audio: "audio/cs-1-2.mp3", text: "There's one, yeah. Not because its tools are unique — plenty of brands have the same features. But it actually got me somewhere." },
       { speaker: "Anya", side: "left", audio: "audio/cs-1-3.mp3", text: "Huh — so it's not really about support or service then?" },
       { speaker: "Dev", side: "right", audio: "audio/cs-1-4.mp3", text: "Exactly. It's the discipline of making sure customers actually reach their goals. That's Customer Success." },
     ],
@@ -368,9 +371,10 @@ const csScenes = [
     img: "images/cs-slide2.jpg",
     alt: "Anya researching content creation tools on her laptop late at night in her bedroom",
     context: "Late at night, Anya researches content-creation tools. She isn't shopping for software — she's shopping for an outcome. Customer Success starts before the sale.",
+    takeaway: "The customer is buying an outcome, not a product. Success starts before the sale.",
     lines: [
       { speaker: "Anya", side: "left", audio: "audio/cs-2-1.mp3", text: "Woah — so many brands, so many tools. I can't tell which of these actually fits what I'm trying to build." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-2-2.mp3", text: "Let me just call them. Hopefully someone helps me figure out what I need — not just another sales pitch." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-2-2.mp3", text: "Let me just call Parmar Services. Hopefully someone helps me figure out what I actually need — not just another sales pitch." },
     ],
   },
   {
@@ -379,10 +383,11 @@ const csScenes = [
     img: "images/cs-slide3.jpg",
     alt: "Split screen: Anya on a video call at home at night, and Meera the sales advisor in a corporate office wearing a headset",
     context: "Meera talks Anya out of buying more than she needs. That single choice demonstrates the Customer Success principle better than any definition could — she optimises for Anya's outcome, not the invoice.",
+    takeaway: "Advising a customer to buy less isn't lost revenue. It's earned trust.",
     lines: [
       { speaker: "Anya", side: "left", audio: "audio/cs-3-1.mp3", text: "So based on what I'm doing, would this set of tools actually be a good starting point?" },
       { speaker: "Meera", side: "right", audio: "audio/cs-3-2.mp3", text: "For where you are right now — yes. You've just started creating content. Start with these three, and add the rest when you actually need them." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-3-3.mp3", text: "That's the first honest answer I've gotten all week." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-3-3.mp3", text: "That's the first honest answer I've gotten all week. Thank you, Meera." },
     ],
   },
   {
@@ -391,9 +396,10 @@ const csScenes = [
     img: "images/cs-slide4.jpg",
     alt: "Anya sitting on her bed at night, smiling at a completed checkout screen on her laptop",
     context: "A frictionless first win. Onboarding is the first promise a company keeps — or breaks.",
+    takeaway: "Onboarding is the first promise a company keeps — or breaks.",
     lines: [
       { speaker: "Anya", side: "left", audio: "audio/cs-4-1.mp3", text: "That was… genuinely easy. Account's set up, and I can start on my first project tonight." },
-      { speaker: "Anya", side: "left", audio: "audio/cs-4-2.mp3", text: "If the rest of it is like this, I'm not going anywhere." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-4-2.mp3", text: "If it stays this easy, I'm staying with them." },
     ],
   },
   {
@@ -402,6 +408,7 @@ const csScenes = [
     img: "images/cs-slide5.jpg",
     alt: "Anya at her desk in the morning, visibly frustrated on the phone, laptop showing LOGIN FAILED",
     context: "The failure Customer Success exists to repair. Note what's actually broken here — not the software, but the ownership. Three people, three instructions, nobody accountable.",
+    takeaway: "Repeat contacts mean the ownership is broken, not the product.",
     lines: [
       { speaker: "Anya", side: "right", audio: "audio/cs-5-1.mp3", text: "This is the third time I've called about this. I've followed every instruction, from three different people." },
       { speaker: "Anya", side: "right", audio: "audio/cs-5-2.mp3", text: "Nobody's actually fixed it. They just keep passing me along." },
@@ -425,7 +432,11 @@ const csScenes = [
     ],
     correct: "C",
     correctFeedback: "Correct — and not because the others are wrong in isolation. A third repeat contact means self-serve and transfers have already failed her twice. What she needs now is ownership and a named person, not another handoff.",
-    incorrectFeedback: "Not quite. Each of these is a reasonable first response — but this is her third call. She has already been transferred and already tried the guide. Repeating a step that has failed twice reads as deflection, however politely it's phrased.",
+    optionFeedback: {
+      A: "A transfer is exactly what has already failed her — she's been passed to three different people. Handing her to a fourth confirms her fear that nobody here is actually responsible.",
+      B: "She has already followed every instruction she was given. Sending a guide implies the problem is her execution, not the product. On a third call, that reads as blame, not help.",
+      D: "The most tempting wrong answer, because it sounds like action. But \u2018internally\u2019 is invisible to her — no name, no timeline, no way to know anything happened. Urgency she cannot see is indistinguishable from being ignored.",
+    },
   },
   {
     title: "Reading the Health Score",
@@ -433,6 +444,7 @@ const csScenes = [
     img: "images/cs-slide7.jpg",
     alt: "Ravi reviewing a dashboard showing a rising green usage graph and a health score of 91, marked healthy",
     context: "The core discipline of the role: a health score is a leading indicator. Ravi acts on good news, not just bad news — which is precisely what separates Customer Success from support.",
+    takeaway: "A health score is a leading indicator. Act on it while things are still going well.",
     lines: [
       { speaker: "Ravi", side: "right", audio: "audio/cs-7-1.mp3", text: "Health score's at 91. Usage is steady, no open tickets, and she's adopted four of the five core features." },
       { speaker: "Ravi", side: "right", audio: "audio/cs-7-2.mp3", text: "Nothing's wrong. Which is exactly when most teams do nothing at all." },
@@ -445,12 +457,69 @@ const csScenes = [
     img: "images/cs-slide8.jpg",
     alt: "Split screen: Anya at home and Ravi in his office, both reviewing the same shared monthly review document on a video call",
     context: "A Quarterly Business Review done properly is a goals review, not a disguised upsell. Ravi solves her problem with a feature she already pays for — and Anya notices.",
+    takeaway: "A QBR reviews the customer's goals — not the vendor's pipeline.",
     lines: [
       { speaker: "Ravi", side: "right", audio: "audio/cs-8-1.mp3", text: "Last quarter you said your goal was to publish twice a week. Where did that actually land?" },
-      { speaker: "Anya", side: "left", audio: "audio/cs-8-2.mp3", text: "Honestly? Closer to once. The editing step is where I keep losing time." },
-      { speaker: "Ravi", side: "right", audio: "audio/cs-8-3.mp3", text: "That's useful. There's a batch-export feature you're not using — it's included in what you already pay for." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-8-2.mp3", text: "Closer to once, honestly. It's the editing — every video takes me hours longer than I plan for." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-8-3.mp3", text: "Then that's what we fix. You're redoing the same edits by hand every time. There's a preset library in your plan — set it once, reuse it on every video after. It's already included in what you pay for." },
       { speaker: "Anya", side: "left", audio: "audio/cs-8-4.mp3", text: "You're… not trying to sell me anything right now, are you?" },
     ],
+  },
+  {
+    type: "decision",
+    title: "Decision Point: The Silent Decline",
+    emotion: "Alertness",
+    img: "images/cs-slide9.jpg",
+    alt: "Ravi looking at a dashboard showing a steeply declining red usage graph, a health score of 48 marked AT RISK, and zero support tickets",
+    context: "The second gated judgment call — and the most counterintuitive. A customer who has gone quiet has not necessarily gone happy.",
+    takeaway: "Silence is not satisfaction. Falling usage with zero complaints is one of the strongest churn signals there is.",
+    setup: "Anya's usage has dropped sharply over two months. She has filed zero support tickets and made zero complaints.",
+    question: "What does this most likely mean?",
+    options: [
+      { key: "A", text: "She's happy — no complaints means no problems." },
+      { key: "B", text: "She's busy. Usage will recover on its own." },
+      { key: "C", text: "She's disengaging quietly, and is at real risk of not renewing." },
+      { key: "D", text: "Wait for her next support ticket before acting." },
+    ],
+    correct: "C",
+    correctFeedback: "Correct. Silence is not satisfaction. A customer who is struggling and still engaged complains. A customer who has quietly given up doesn't bother — they just stop using the product and let the contract lapse. Falling usage with zero tickets is one of the strongest churn signals there is, and it arrives weeks before anyone says the word \u2018cancel.\u2019",
+    optionFeedback: {
+      A: "This is the exact instinct the role has to unlearn. Absence of complaint is not evidence of health — complaints require effort, and effort requires still caring. The dangerous customer is the one who has stopped bothering to tell you anything.",
+      B: "Maybe. But 'it'll fix itself' is a hope, not a plan — and a two-month decline is already a trend, not a blip. Waiting to find out costs you the one thing you can't get back: time to intervene.",
+      D: "A ticket is the signal that comes too late. She has filed zero — and a disengaging customer never will. If you wait for a complaint from someone who has stopped caring enough to complain, you'll hear from her exactly once: at cancellation.",
+    },
+  },
+  {
+    title: "The Customer Succeeds",
+    emotion: "Pride",
+    img: "images/cs-slide10.jpg",
+    alt: "Anya presenting her finished creative work confidently on a large screen to three engaged, smiling colleagues in a bright meeting room",
+    context: "The outcome Customer Success exists to produce. Not a renewal, not a happy survey — a customer who achieved the thing they came to do.",
+    takeaway: "The real measure of Customer Success is not retention. It's whether the customer actually achieved their goal.",
+    lines: [
+      { speaker: "Anya", side: "left", audio: "audio/cs-10-1.mp3", text: "This is the campaign — start to finish, and we shipped it two weeks early." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-10-2.mp3", text: "A year ago, I couldn't even log in. Now look at this." },
+    ],
+  },
+  {
+    title: "Renewal",
+    emotion: "Trust",
+    img: "images/cs-slide8.jpg",
+    alt: "Split screen: Anya at her desk and Ravi in his office, both relaxed and smiling on a video call",
+    context: "Retention as an outcome, not a transaction. The renewal was earned across the whole journey — long before the renewal date arrived.",
+    takeaway: "You don't sell the renewal at renewal time. You earn it in every interaction before it.",
+    lines: [
+      { speaker: "Ravi", side: "right", audio: "audio/cs-11-1.mp3", text: "It's renewal season. I'm not going to pitch you — let's just look at what you actually got out of the year." },
+      { speaker: "Anya", side: "left", audio: "audio/cs-11-2.mp3", text: "Honestly, the thing that kept me wasn't the product. It's that someone noticed when I went quiet." },
+      { speaker: "Ravi", side: "right", audio: "audio/cs-11-3.mp3", text: "That's the job. Same goals conversation next quarter?" },
+    ],
+  },
+  {
+    type: "timeline",
+    title: "The Full Journey",
+    emotion: "Clarity",
+    context: "The complete arc in one view — and the shape of the health score across it. The dip is the breakdown; the recovery is everything Customer Success did next.",
+    takeaway: "Customer Success is reading the signals before anyone complains, owning problems by name, measuring the customer's goals, and earning the renewal long before it's due.",
   },
 ];
 
@@ -466,6 +535,7 @@ if (csShowEl) {
   const csSlideTitle = document.getElementById("csSlideTitle");
   const csSlideEmotion = document.getElementById("csSlideEmotion");
   const csSlideContext = document.getElementById("csSlideContext");
+  const csSlideInfo = document.getElementById("csSlideInfo");
   const csPrev = document.getElementById("csPrev");
   const csNext = document.getElementById("csNext");
   const csDots = document.getElementById("csDots");
@@ -555,7 +625,8 @@ if (csShowEl) {
         } else {
           btn.classList.add("wrong");
           fb.className = "dpanel-fb no";
-          fb.textContent = scene.incorrectFeedback;
+          const perOpt = scene.optionFeedback && scene.optionFeedback[opt.key];
+          fb.textContent = perOpt || scene.incorrectFeedback;
         }
       };
       opts.appendChild(btn);
@@ -643,9 +714,77 @@ if (csShowEl) {
         sceneIndex < csScenes.length - 1
           ? "Scene complete — tap Next to continue →"
           : "Scene complete — tap Replay to hear it again";
+      if (scene.takeaway) showTakeaway(scene.takeaway);
     } else {
       dsceneHint.textContent = "Tap the scene to continue →";
+      hideTakeaway();
     }
+  }
+
+  // ----- Takeaway strip (learner-facing lesson, shown after final line) -----
+  function showTakeaway(text) {
+    if (!text) return;
+    let strip = document.getElementById("csTakeaway");
+    if (!strip) {
+      strip = document.createElement("div");
+      strip.id = "csTakeaway";
+      strip.className = "cs-takeaway";
+      csSlideInfo.appendChild(strip);
+    }
+    strip.innerHTML = `<span class="cs-takeaway-label">Takeaway</span><span>${text}</span>`;
+    strip.classList.remove("visible");
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => strip.classList.add("visible"))
+    );
+  }
+  function hideTakeaway() {
+    const strip = document.getElementById("csTakeaway");
+    if (strip) strip.classList.remove("visible");
+  }
+
+  // ----- Timeline scene (hand-coded, no image) -----
+  function buildTimeline() {
+    dsceneEl.classList.add("timeline-mode");
+    const milestones = [
+      { label: "Research", score: 0 },
+      { label: "Purchase", score: 78 },
+      { label: "Breakdown", score: 30 },
+      { label: "Ownership", score: 55 },
+      { label: "Health Check", score: 88 },
+      { label: "Renewal", score: 94 },
+    ];
+    const wrap = document.createElement("div");
+    wrap.className = "dtimeline";
+    const pts = milestones
+      .map((m, i) => {
+        const x = (i / (milestones.length - 1)) * 100;
+        const y = 100 - m.score;
+        return `${x},${y}`;
+      })
+      .join(" ");
+    const dots = milestones
+      .map((m, i) => {
+        const x = (i / (milestones.length - 1)) * 100;
+        const y = 100 - m.score;
+        return `<circle cx="${x}" cy="${y}" r="2.4" class="dtl-dot"/>`;
+      })
+      .join("");
+    const labels = milestones
+      .map((m, i) => {
+        const x = (i / (milestones.length - 1)) * 100;
+        return `<div class="dtl-label" style="left:${x}%">${m.label}</div>`;
+      })
+      .join("");
+    wrap.innerHTML = `
+      <div class="dtl-title">The customer's health score across the journey</div>
+      <div class="dtl-chart">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="dtl-svg">
+          <polyline points="${pts}" class="dtl-line"/>
+          ${dots}
+        </svg>
+        <div class="dtl-labels">${labels}</div>
+      </div>`;
+    dsceneEl.appendChild(wrap);
   }
 
   function resetScene() {
@@ -671,24 +810,36 @@ if (csShowEl) {
       bubble.remove();
       bubble = null;
     }
-    dsceneEl.querySelectorAll(".dpanel").forEach((p) => p.remove());
-    dsceneEl.classList.remove("decision-mode");
+    dsceneEl.querySelectorAll(".dpanel, .dtimeline").forEach((p) => p.remove());
+    dsceneEl.classList.remove("decision-mode", "timeline-mode");
     dsceneHint.style.display = "";
     dsceneHint.textContent = "Tap the scene to continue →";
+    hideTakeaway();
 
-    dsceneImg.src = scene.img;
-    dsceneImg.alt = scene.alt;
     csSlideProgress.textContent = `Scene ${sceneIndex + 1} of ${csScenes.length}`;
     csSlideTitle.textContent = scene.title;
     csSlideEmotion.textContent = scene.emotion;
     csSlideContext.textContent = scene.context;
 
-    dsceneReplay.style.display = scene.type === "decision" ? "none" : "";
+    dsceneReplay.style.display =
+      scene.type === "decision" || scene.type === "timeline" ? "none" : "";
 
     if (scene.type === "decision") {
+      dsceneImg.src = scene.img;
+      dsceneImg.alt = scene.alt;
       buildDecision(scene);
       dsceneDots.innerHTML = "";
+    } else if (scene.type === "timeline") {
+      dsceneImg.removeAttribute("src");
+      dsceneImg.alt = "";
+      buildTimeline();
+      dsceneDots.innerHTML = "";
+      dsceneHint.style.display = "none";
+      dsceneProgress.textContent = "Summary";
+      showTakeaway(scene.takeaway);
     } else {
+      dsceneImg.src = scene.img;
+      dsceneImg.alt = scene.alt;
       dsceneProgress.textContent = "Tap to begin";
       buildLineDots();
     }

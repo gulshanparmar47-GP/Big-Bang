@@ -1,6 +1,16 @@
 // ---------- Sequential Slideshow (V2 storyboard) ----------
 const slides = [
   {
+    type: "objective", title: "Before We Begin", emotion: "Intent",
+    onscreen: "What this journey is for",
+    objectives: [
+      "Place the origin of the Universe, the Earth, and the first life in their correct order — and their true scale.",
+      "Understand how we know these ages: from evidence, not assertion.",
+      "Grasp, in human terms, just how vast 13.8 billion years really is.",
+    ],
+    thesis: "We measure our lives in minutes and years. This is an invitation to think in billions — and to believe it because the evidence shows it, not because someone said so.",
+  },
+  {
     type: "video", title: "Age of Universe", emotion: "Curiosity",
     src: "https://www.youtube.com/embed/y6vyizUkCVI",
     onscreen: "How Old Are You? How Old Is Earth? How Old Is The Universe?",
@@ -11,6 +21,18 @@ const slides = [
     src: "https://www.youtube.com/embed/A1_1htP1LcI",
     onscreen: "13.8 Billion Years Ago: The Beginning Of Our Story",
     narration: "Around 13.8 billion years ago, the Universe began expanding from an extremely hot and dense state. Scientists call this event the Big Bang. From this beginning came space, time, stars, galaxies, planets and eventually us.",
+  },
+  {
+    type: "scale", title: "The Scale Problem", emotion: "Perspective",
+    onscreen: "If all of time were a single year…",
+    calendar: [
+      { date: "January 1", event: "The Big Bang", sub: "The universe begins" },
+      { date: "September", event: "Earth forms", sub: "4.54 billion years ago" },
+      { date: "Late September", event: "First life appears", sub: "single cells in the ocean" },
+      { date: "December 25", event: "Dinosaurs arrive", sub: "late in the cosmic year" },
+      { date: "Dec 31, 11:59:46pm", event: "All human history", sub: "every empire, every book — the last 14 seconds" },
+    ],
+    takeaway: "Everything you have ever been taught about human history fits in the final seconds of a cosmic year.",
   },
   {
     type: "image", title: "Evolution", emotion: "Reflection",
@@ -49,6 +71,16 @@ const slides = [
     narration: "As Earth cooled and oceans formed, simple chemical compounds interacted for millions of years. Eventually, the first single-celled organisms appeared, marking the beginning of life on Earth.",
   },
   {
+    type: "evidence", title: "How Do We Know?", emotion: "Reasoning",
+    onscreen: "These numbers aren't beliefs. Here's how we measure them.",
+    evidence: [
+      { claim: "The universe's age", method: "From the light of distant galaxies, stretched as space itself expands." },
+      { claim: "Earth's age", method: "From radioactive decay in the oldest rocks and meteorites — atoms that tick like clocks at a known rate." },
+      { claim: "The first life", method: "From fossils pressed into stone 3.5 billion years old." },
+    ],
+    takeaway: "A scientific claim comes with its evidence attached. You don't have to take it on faith — you can check it.",
+  },
+  {
     type: "quiz", title: "Knowledge Check", emotion: "Achievement",
   },
   {
@@ -67,10 +99,49 @@ const slides = [
 
 const QUIZ_INDEX = slides.findIndex((s) => s.type === "quiz");
 const CORRECT_ORDER = ["Big Bang", "Galaxies", "Sun", "Earth", "Moon", "First Life"];
+
+// Comprehension questions that follow the sequencing task
+const QUIZ_MCQS = [
+  {
+    prompt: "The Sun had to form before the Earth. Why?",
+    options: [
+      { key: "A", text: "Earth is made from the leftover gas and dust that surrounded the newborn Sun." },
+      { key: "B", text: "The Sun is bigger, so it came first." },
+      { key: "C", text: "The Earth needed sunlight in order to exist." },
+      { key: "D", text: "They actually formed at the same time." },
+    ],
+    correct: "A",
+    feedback: {
+      A: "Exactly. Earth didn't form beside the Sun — it formed from the same collapsing cloud, out of the material left orbiting the young star. The order isn't arbitrary; one is the leftover of the other.",
+      B: "Size doesn't determine order of formation. A bigger object isn't automatically older — think about what each one is physically made from instead.",
+      C: "This reverses cause and effect. Earth doesn't need sunlight to exist as a planet — but it did need the Sun's leftover material to form from. Sunlight matters for life, not for the planet's existence.",
+      D: "Close, but not quite — they're related but not simultaneous. The Sun formed first from a collapsing cloud; Earth assembled afterward from the debris left orbiting it.",
+    },
+  },
+  {
+    prompt: "On the cosmic calendar — where the whole 13.8-billion-year history of the universe fits into a single year — how much of it is ALL of recorded human history?",
+    options: [
+      { key: "A", text: "The last few months." },
+      { key: "B", text: "The last few days." },
+      { key: "C", text: "The last 14 seconds before midnight on December 31st." },
+      { key: "D", text: "About half the year." },
+    ],
+    correct: "C",
+    feedback: {
+      A: "Not even close — and that's exactly the point. Our intuition wildly overestimates humanity's share of cosmic time.",
+      B: "Still far too much. Every empire, every book, every name in history fits into something far smaller than days.",
+      C: "Yes — and sit with that for a second. Everything humans have ever written down fits in the final 14 seconds of a cosmic year. That's the scale this whole journey is really about.",
+      D: "Not remotely — this is the intuition the whole module exists to correct. Humanity's share isn't half the year; it's the last 14 seconds of it.",
+    },
+  },
+];
+
 let quizPassed = false;
 let quizPool = [];
 let quizAnswer = [];
 let quizAttempts = 0;
+let quizSeqDone = false;
+let quizMcqDone = [false, false];
 
 let slideIndex = 0;
 const slideFrame = document.getElementById("slideFrame");
@@ -91,32 +162,45 @@ function shuffleArr(arr) {
   return a;
 }
 
+function refreshQuizPassed() {
+  quizPassed = quizSeqDone && quizMcqDone[0] && quizMcqDone[1];
+  updateNextButtonState();
+}
+
 function buildQuizUI(container) {
+  quizSeqDone = false;
+  quizMcqDone = [false, false];
+  quizPassed = false;
   quizPool = shuffleArr(CORRECT_ORDER);
   quizAnswer = [];
+  quizAttempts = 0;
 
+  container.classList.add("quiz-scroll");
+
+  // ---- Question 1: sequencing ----
+  const q1 = document.createElement("div");
+  q1.className = "iq-block";
+  q1.innerHTML = `<div class="iq-qnum">Question 1 of 3 · Sequence</div>`;
   const prompt = document.createElement("p");
   prompt.className = "iq-prompt";
-  prompt.textContent = "Arrange these events in the order they happened, earliest first. You must get the sequence right to continue.";
-  container.appendChild(prompt);
+  prompt.textContent = "Arrange these events in the order they happened, earliest first.";
+  q1.appendChild(prompt);
 
   const poolLabel = document.createElement("div");
   poolLabel.className = "iq-label";
   poolLabel.textContent = "Tap to add, in order";
-  container.appendChild(poolLabel);
-
+  q1.appendChild(poolLabel);
   const poolEl = document.createElement("div");
   poolEl.className = "iq-pool";
-  container.appendChild(poolEl);
+  q1.appendChild(poolEl);
 
   const answerLabel = document.createElement("div");
   answerLabel.className = "iq-label";
   answerLabel.textContent = "Your sequence";
-  container.appendChild(answerLabel);
-
+  q1.appendChild(answerLabel);
   const answerEl = document.createElement("div");
   answerEl.className = "iq-answer";
-  container.appendChild(answerEl);
+  q1.appendChild(answerEl);
 
   const controls = document.createElement("div");
   controls.className = "iq-controls";
@@ -128,11 +212,12 @@ function buildQuizUI(container) {
   resetBtn.textContent = "Reset";
   controls.appendChild(checkBtn);
   controls.appendChild(resetBtn);
-  container.appendChild(controls);
+  q1.appendChild(controls);
 
   const feedback = document.createElement("p");
   feedback.className = "iq-feedback";
-  container.appendChild(feedback);
+  q1.appendChild(feedback);
+  container.appendChild(q1);
 
   function renderPools() {
     poolEl.innerHTML = "";
@@ -142,6 +227,7 @@ function buildQuizUI(container) {
       btn.className = "iq-card";
       btn.textContent = item;
       btn.onclick = () => {
+        if (quizSeqDone) return;
         quizPool = quizPool.filter((i) => i !== item);
         quizAnswer.push(item);
         renderPools();
@@ -153,7 +239,7 @@ function buildQuizUI(container) {
       btn.className = "iq-card";
       btn.textContent = `${idx + 1}. ${item}`;
       btn.onclick = () => {
-        if (quizPassed) return;
+        if (quizSeqDone) return;
         quizAnswer = quizAnswer.filter((i) => i !== item);
         quizPool.push(item);
         renderPools();
@@ -164,6 +250,7 @@ function buildQuizUI(container) {
   renderPools();
 
   checkBtn.onclick = () => {
+    if (quizSeqDone) return;
     if (quizAnswer.length < CORRECT_ORDER.length) {
       feedback.textContent = "Place all six events in order first.";
       feedback.className = "iq-feedback no";
@@ -172,29 +259,73 @@ function buildQuizUI(container) {
     quizAttempts++;
     const correct = quizAnswer.every((v, i) => v === CORRECT_ORDER[i]);
     if (correct) {
-      quizPassed = true;
-      feedback.textContent = "\u2713 Correct \u2014 Next is now unlocked.";
+      quizSeqDone = true;
+      feedback.textContent = "\u2713 Correct order.";
       feedback.className = "iq-feedback ok";
-      updateNextButtonState();
+      refreshQuizPassed();
     } else {
       const hint = quizAttempts >= 2 ? " Hint: think about what has to physically exist before the next thing can form." : "";
       feedback.textContent = `Not quite yet.${hint}`;
       feedback.className = "iq-feedback no";
     }
   };
-
   resetBtn.onclick = () => {
+    if (quizSeqDone) return;
     quizPool = shuffleArr(CORRECT_ORDER);
     quizAnswer = [];
     feedback.textContent = "";
     renderPools();
   };
+
+  // ---- Questions 2 & 3: multiple choice with per-option feedback ----
+  QUIZ_MCQS.forEach((mcq, qi) => {
+    const block = document.createElement("div");
+    block.className = "iq-block";
+    block.innerHTML = `<div class="iq-qnum">Question ${qi + 2} of 3 · ${qi === 1 ? "Scale" : "Comprehension"}</div>`;
+    const p = document.createElement("p");
+    p.className = "iq-prompt";
+    p.textContent = mcq.prompt;
+    block.appendChild(p);
+
+    const opts = document.createElement("div");
+    opts.className = "iq-mcq-opts";
+    block.appendChild(opts);
+
+    const fb = document.createElement("p");
+    fb.className = "iq-feedback";
+    block.appendChild(fb);
+
+    mcq.options.forEach((opt) => {
+      const b = document.createElement("button");
+      b.className = "iq-mcq-opt";
+      b.innerHTML = `<span class="iq-mcq-key">${opt.key}</span><span>${opt.text}</span>`;
+      b.onclick = () => {
+        if (quizMcqDone[qi]) return;
+        const right = opt.key === mcq.correct;
+        opts.querySelectorAll(".iq-mcq-opt").forEach((x) => x.classList.remove("wrong"));
+        if (right) {
+          b.classList.add("right");
+          opts.querySelectorAll(".iq-mcq-opt").forEach((x) => (x.disabled = true));
+          fb.className = "iq-feedback ok";
+          fb.textContent = "\u2713 " + mcq.feedback[opt.key];
+          quizMcqDone[qi] = true;
+          refreshQuizPassed();
+        } else {
+          b.classList.add("wrong");
+          fb.className = "iq-feedback no";
+          fb.textContent = mcq.feedback[opt.key];
+        }
+      };
+      opts.appendChild(b);
+    });
+    container.appendChild(block);
+  });
 }
 
 function updateNextButtonState() {
   if (slideIndex === QUIZ_INDEX && !quizPassed) {
     slideNext.disabled = true;
-    slideNext.textContent = "Complete sequence to continue";
+    slideNext.textContent = "Answer all three to continue";
   } else {
     slideNext.disabled = false;
     slideNext.textContent = slideIndex === slides.length - 1 ? "Restart \u21ba" : "Next \u2192";
@@ -221,12 +352,39 @@ function renderSlide() {
   } else if (s.type === "quiz") {
     slideFrame.classList.add("quiz-mode");
     buildQuizUI(slideFrame);
+  } else if (s.type === "objective") {
+    slideFrame.classList.add("panel-mode");
+    slideFrame.innerHTML =
+      `<div class="bpanel"><div class="bpanel-eyebrow">${s.onscreen}</div>` +
+      `<ul class="bpanel-objectives">` +
+      s.objectives.map((o) => `<li>${o}</li>`).join("") +
+      `</ul><p class="bpanel-thesis">${s.thesis}</p></div>`;
+  } else if (s.type === "scale") {
+    slideFrame.classList.add("panel-mode");
+    slideFrame.innerHTML =
+      `<div class="bpanel"><div class="bpanel-eyebrow">${s.onscreen}</div>` +
+      `<div class="bcal">` +
+      s.calendar.map((c) =>
+        `<div class="bcal-row"><span class="bcal-date">${c.date}</span>` +
+        `<span class="bcal-event">${c.event}<span class="bcal-sub">${c.sub}</span></span></div>`
+      ).join("") +
+      `</div><p class="bpanel-take">${s.takeaway}</p></div>`;
+  } else if (s.type === "evidence") {
+    slideFrame.classList.add("panel-mode");
+    slideFrame.innerHTML =
+      `<div class="bpanel"><div class="bpanel-eyebrow">${s.onscreen}</div>` +
+      `<div class="bev">` +
+      s.evidence.map((e) =>
+        `<div class="bev-row"><span class="bev-claim">${e.claim}</span>` +
+        `<span class="bev-method">${e.method}</span></div>`
+      ).join("") +
+      `</div><p class="bpanel-take">${s.takeaway}</p></div>`;
   }
 
   slideProgress.textContent = `Screen ${slideIndex + 1} of ${slides.length}`;
   slideTitleText.textContent = s.title;
   slideEmotion.textContent = s.emotion;
-  slideNarration.textContent = s.type === "quiz" ? "" : s.narration;
+  slideNarration.textContent = s.narration || "";
   slidePrev.disabled = slideIndex === 0;
   updateNextButtonState();
 
@@ -286,14 +444,17 @@ if (slideFrame) {
 
 // ---------- Emotional Arc Chart ----------
 const arcData = [
+  { label: "Objective", emotion: "Intent", value: 40 },
   { label: "Age of\nUniverse", emotion: "Curiosity", value: 55 },
   { label: "Big Bang", emotion: "Awe", value: 88 },
+  { label: "Scale", emotion: "Perspective", value: 82 },
   { label: "Evolution", emotion: "Reflection", value: 45 },
   { label: "Galaxies", emotion: "Wonder", value: 78 },
   { label: "Sun", emotion: "Gratitude", value: 62 },
   { label: "Earth", emotion: "Satisfaction", value: 58 },
   { label: "Moon", emotion: "Fascination", value: 70 },
   { label: "First Life", emotion: "Hope", value: 66 },
+  { label: "Evidence", emotion: "Reasoning", value: 60 },
   { label: "Quiz", emotion: "Achievement", value: 74 },
   { label: "Stardust", emotion: "Awe", value: 92 },
   { label: "3 Lessons", emotion: "Inspiration", value: 96 },
